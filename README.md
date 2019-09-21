@@ -384,5 +384,5 @@ Serverless functions should by design be small nearly atomic actions. This means
 
 ## 9. Connecting to Services
 
-## 10. Pipelines?
+## 10. Deployment Pipelines?
 
