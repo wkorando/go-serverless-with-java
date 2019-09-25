@@ -1,0 +1,12 @@
+# wskdeploy manifest file
+
+packages:
+  gojavaserverless:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      functionHello:
+        version: 1.0
+        function: target/hello-world-java.jar
+        runtime: java
+        main: com.example.FunctionApp
