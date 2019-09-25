@@ -6,7 +6,18 @@ packages:
     license: Apache-2.0
     actions:
       functionHello:
-        version: 1.0
         function: hello-world-java.jar
         runtime: java
         main: com.example.FunctionApp
+      webHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.FunctionApp      
+        web-export: true
+    apis:
+      webHello:
+        web:
+          hello:
+            webHello:
+              method: GET
+              response: http
