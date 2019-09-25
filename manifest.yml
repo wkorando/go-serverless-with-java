@@ -7,6 +7,6 @@ packages:
     actions:
       functionHello:
         version: 1.0
-        function: target/hello-world-java.jar
+        function: hello-world-java.jar
         runtime: java
         main: com.example.FunctionApp
