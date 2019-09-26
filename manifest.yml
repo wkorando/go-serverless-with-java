@@ -1,7 +1,7 @@
 # wskdeploy manifest file
 
 packages:
-  gojavaserverless:
+  default:
     version: 1.0
     license: Apache-2.0
     actions:
