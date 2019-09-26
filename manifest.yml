@@ -1,0 +1,23 @@
+# wskdeploy manifest file
+
+packages:
+  default:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      functionHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.FunctionApp
+      webHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.WebHello      
+        web-export: true
+    apis:
+      webHello:
+        web:
+          hello:
+            webHello:
+              method: GET
+              response: http
