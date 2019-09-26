@@ -1,13 +1,13 @@
 version: '2'
 template:
-  name: "Go Serverless with Java cloud functions"
-  description: "Deploy your IBM Cloud Functions for the go-serverless-java app."
+  name: "Go Serverless with Java"
+  description: "Deploy your serverless actions created in the 'Go serverless with Java' lab."
   required:
     - repo
     - build
 
 toolchain:
-  name: go-serverless-java
+  name: go-serverless-with-java
 
 services:
 

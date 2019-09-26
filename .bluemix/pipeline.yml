@@ -9,6 +9,8 @@ stages:
   jobs:
   - name: Build
     type: builder
+    build_type: maven
+    artifact_dir: 'target'
     script: |-
       #!/bin/bash
 
