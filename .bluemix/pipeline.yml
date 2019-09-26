@@ -1,0 +1,59 @@
+stages:
+- name: Build Stage
+  inputs:
+  - type: git
+    branch: master
+    service: ${REPO}
+  triggers:
+  - type: commit
+  jobs:
+  - name: Build
+    type: builder
+    script: |-
+      #!/bin/bash
+
+      # Package the compiled code in its distributed format (.jar) and store 
+      # it in the 'target' output directory
+      mvn -B package
+
+      # Copy the wksdeploy manifest.yml file to the 'target' directory as well
+      # to have it available in the 'Deploy stage'
+      cp manifest.yml $ARCHIVE_DIR
+- name: Deploy Stage
+  inputs:
+  - type: job
+    stage: Build Stage
+    job: Build
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    artifact_dir: ''
+    build_type: shell
+    target:
+      region_id: ${REGION_ID}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+      application: ${CF_APP}
+      api_key: ${API_KEY}
+    script: |-
+      #!/bin/bash
+
+      ibmcloud login -a ${CF_TARGET_URL} --apikey ${PIPELINE_BLUEMIX_API_KEY}
+      ibmcloud target --cf -o ${CF_ORG} -s ${CF_SPACE}
+
+      ################################################################
+      # Fetch auth credentials
+      ################################################################
+
+      echo 'Retrieving Cloud Functions authorization key...'
+
+      ibmcloud fn api list
+
+      ################################################################
+      # Deploy 
+      ################################################################
+
+      echo "Running wskdeploy..."
+      ibmcloud fn deploy -m "manifest.yml"

@@ -385,4 +385,6 @@ Serverless functions should by design be small nearly atomic actions. This means
 ## 9. Connecting to Services
 
 ## 10. Deployment Pipelines?
+Click the button below to deploy a toolchain that automates the deployment of your serverless actions.
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master)
 
