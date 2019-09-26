@@ -34,7 +34,7 @@ public class FunctionApp {
     JsonPrimitive nameArg = args.getAsJsonPrimitive("name");
     String result;
     if (nameArg == null) {
-      result = "Hello! Welcome to OpenWhisk changed version...";
+      result = "Hello! Welcome to OpenWhisk...";
     } else {
       result = "Hello " + nameArg.getAsString();
     }
