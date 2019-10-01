@@ -42,7 +42,7 @@ stages:
     script: |-
       #!/bin/bash
 
-      ibmcloud login -a ${CF_TARGET_URL} --apikey ${PIPELINE_BLUEMIX_API_KEY}
+      ibmcloud login -r eu-gb --apikey ${PIPELINE_BLUEMIX_API_KEY}
       ibmcloud target --cf -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
