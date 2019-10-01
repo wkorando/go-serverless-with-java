@@ -366,36 +366,31 @@ So far we have been just return JSON from our function, but functions are more f
 6. Like earlier, you can change the `name` query parameter to change the value being returned.
 
 ## 6. Deployment Pipeline
-Currently we are deploying functions directly from our local computer. This process of building and deploying functions won't work with in an organization. Let's setup a deployment pipeline that will build and deploy our pipeline when we push changes to a git repository.
+Currently we are deploying functions directly from our local computer. This process of building and deploying functions won't work within an organization. Let's set up a so-called toolchain pipeline that will clone this repo to a private gitlab repo and sets up a delivery pipeline with two stages. One that builds the java code and the second one that deploys the serverless functions to the cloud.
 
-Let's create a deployment pipeline by running through the following steps:
+1. To create the toolchain, CTRL-click the following button:
+	
+	[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/wkorando/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
 
-1. [![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/wkorando/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
+2. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Dallas will be the default region when your closer to the US. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
 
-2. Verify the region is set to the same region your functions reside in:
-	![](images/set_region.png)
+	![](./images/pipeline-1.png)
 
-	Here is the list of the regions. Match the region in the list to the region we were using when calling the functions over the web in the earlier lessons:
-	```
-	au-syd          Sydney   
-	jp-osa          Osaka   
-	jp-tok          Tokyo   
-	kr-seo          Seoul   
-	eu-de           Frankfurt   
-	eu-gb           London   
-	us-south        Dallas   
-	us-east         Washington DC   
-	```
-
-3. Next create an API Key for this repo by clicking **Delivery Pipeline** and then the **+ Create** button. The default values that are generated should be fine.
+3. Next create an API Key for this repo by clicking **Delivery Pipeline** and then the **Create** button. The default values that are generated should be fine.
 
 	![](images/create_api_key.png)
 
 4. Cick the **Create** button in the top right corner of the page.
-5. After a few moments click the **Eclipse Orion Web IDE** card in the middle of the page. When making code changes, we will use this web based IDE as it has been pre-configured to communicate with the newly created GitLab repo.
+
+5. After a few moments, click the **Eclipse Orion Web IDE** card in the middle of the page. When making code changes, we will use this web based IDE as it has been pre-configured to communicate with the newly created GitLab repo.
+
 	![](images/open_ide.png)
 
-With these steps we have created a deployment pipeline. When we did this IBM Cloud clone the github repository of this workshop and greate a gitlab repo hosted on IBM Cloud. We then updated git to point to the newly created gitlab repo. Now when we push changes, this will kick off the the deployment pipeline!
+6. Now, click the Delivery Pipeline tile (1) to check out the pipeline. You should see a pipeline similar to:
+
+![](./images/pipeline-4.png)
+
+When all stages are finished -- as depicted above -- you're ready to check out the serverless actions in the Cloud Functions dashboard. Whenever we push changes to our newly created GitLab repo, this will kick off the deployment pipeline to update the serverless actions and/or add new functions, APIs, etc.
 
 ## 7. Viewing the Functions Dashboard
 
@@ -405,9 +400,9 @@ IBM Cloud provides a convenient dashboard for viewing your functions. You can ac
 
 These actions have been created via the CLI at the start of this lab. They have in the previous section been updated via the delivery pipline. The latter also defined an API that can be further explored in the API section of the dashboard. We'll dive further into that topic in the API Gateway section of this lab. 
 
-The serverless functions functions `helloJava` and `webHello` are both written in Java. Hence, the code cannot be viewed and changed via the dashboard. They can be invoked though. 
+1. The serverless functions functions `helloJava` and `webHello` are both written in Java. Hence, the code cannot be viewed and changed via the dashboard. They can be invoked though. 
 
-1. Invoke the function `helloJava` by clicking the action and then click Invoke.
+	Invoke the function `helloJava` by clicking the action and then click Invoke.
 
 	![](./images/dashboard-2.png)
 
@@ -428,7 +423,8 @@ The serverless functions functions `helloJava` and `webHello` are both written i
 	```
 	Finally, return to the actions dashboard. 
 
-### OPTIONAL: Create a new action via the Cloud Functions dashboard
+### Create a new action via the Cloud Functions dashboard (OPTIONAL)
+
 If you want to explore what the possibilities are when creating cloud functions via the UI, click the 'Create' button. In the next page, you can either create new triggers and/or sequences but also new actions via a quick template or from scratch. Select the Quickstart templates to continue and choose Hello World. You should see a screen similar to 
 
 ![](./images/dashboard-3.png)
@@ -439,7 +435,7 @@ Now select a favourite language using the dropdown (1). We've chosen for NodeJS 
 ```
 When there is input, the result is the same as for the `helloJava`. Please see for yourself by invoking the `hello-world` action with some input as well. Next, let's add more value to our serverless functions by defining sequences.
 
-## 8. Sequences
+## 8. Sequences (work in progess)
 
 Serverless functions should by design be small nearly atomic actions. This means that a single serverless function often does not provide a lot of value. In this section we will setup a Sequence. This will alllow us to pass the returned value from one function to another. Of course this sequence can be created using the Cloud Functions UI, but in this section we will be doing this by updating the so-called openwhisk manifest.yml and let the push to the clone GitLab repo trigger the delivery pipeline to deploy the changes.
 
