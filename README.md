@@ -393,10 +393,8 @@ Let's create a deployment pipeline by running through the following steps:
 	![](images/create_api_key.png)
 	
 4. Cick the **Create** button in the top right corner of the page. 
-5. After a few moments click the **git** card in the middle of the page
-	![](images/set_git_repo.png)
-6. Click the **clone** button in the top right of the page and copy the value of the field under **Clone with HTTPS**
-7.  In the terminal from the root of the project run `git remote set-url origin [copied value]`
+5. After a few moments click the **Eclipse Orion Web IDE** card in the middle of the page. When making code changes, we will use this web based IDE as it has been pre-configured to communicate with the newly created GitLab repo.
+	![](images/open_ide.png)
 
 With these steps we have created a deployment pipeline. When we did this IBM Cloud clone the github repository of this workshop and greate a gitlab repo hosted on IBM Cloud. We then updated git to point to the newly created gitlab repo. Now when we push changes, this will kick off the the deployment pipeline!
 
