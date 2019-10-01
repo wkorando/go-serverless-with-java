@@ -271,19 +271,19 @@ Functions can be setup so they can be called directly over http as well. Let's t
 	This command will return with the url to call you function:
 	
 	```
-	https://us-south.functions.cloud.ibm.com/api/v1/web/SAMPLE_URL/default/helloJava
+	https://[region].functions.cloud.ibm.com/api/v1/web/SAMPLE_URL/default/helloJava
 	```
 	
 3.	Because this command is return JSON, we will need to append the end of the url with `.json` when calling it: 
 
 	```
-	curl -i https://us-south.functions.cloud.ibm.com/api/v1/web/SAMPLE_URL/default/helloJava.json
+	curl -i https://[region].functions.cloud.ibm.com/api/v1/web/SAMPLE_URL/default/helloJava.json
 	```
 	
 4. 	You might have noticed the result was different this time. Previous we have been passing the param name to the function when invoking it through the command line `--param name World`. We can accomplish this same behavior by passing a value as a query param (e.g. `?name=World`):
 
 	```
-	curl -i https://us-south.functions.cloud.ibm.com/api/v1/web/SAMPLE_URL/default/helloJava.json?name=World
+	curl -i https://[region].functions.cloud.ibm.com/api/v1/web/SAMPLE_URL/default/helloJava.json?name=World
 	```
 
 
@@ -366,25 +366,63 @@ So far we have been just return JSON from our function, but functions are more f
 6. Like earlier, you can change the `name` query parameter to change the value being returned.
 
 
-## 6. Viewing the Functions Dashboard
+## 6. Deployment Pipeline
+Currently we are deploying functions directly from our local computer. This process of building and deploying functions won't work with in an organization. Let's setup a deployment pipeline that will build and deploy our pipeline when we push changes to a git repository. 
+
+Let's create a deployment pipeline by running through the following steps:
+
+1. [![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/wkorando/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
+
+2. Verify the region is set to the same region your functions reside in:
+	![](images/set_region.png)
+
+	Here is the list of the regions. Match the region in the list to the region we were using when calling the functions over the web in the earlier lessons:
+	```
+	au-syd          Sydney   
+	jp-osa          Osaka   
+	jp-tok          Tokyo   
+	kr-seo          Seoul   
+	eu-de           Frankfurt   
+	eu-gb           London   
+	us-south        Dallas   
+	us-east         Washington DC   
+	```
+
+3. Next create an API Key for this repo by clicking **Delivery Pipeline** and then the **+ Create** button. The default values that are generated should be fine. 
+
+	![](images/create_api_key.png)
+	
+4. Cick the **Create** button in the top right corner of the page. 
+5. After a few moments click the **git** card in the middle of the page
+	![](images/set_git_repo.png)
+6. Click the **clone** button in the top right of the page and copy the value of the field under **Clone with HTTPS**
+7.  In the terminal from the root of the project run `git remote set-url origin [copied value]`
+
+With these steps we have created a deployment pipeline. When we did this IBM Cloud clone the github repository of this workshop and greate a gitlab repo hosted on IBM Cloud. We then updated git to point to the newly created gitlab repo. Now when we push changes, this will kick off the the deployment pipeline!
+
+## 7. Viewing the Functions Dashboard
 
 IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions)
 
-**Collaborator:** Pratik Patel [Github](https://github.com/prpatel) [Twitter](https://twitter.com/prpatel)
-
-## API Gateway
 
 
 
-## 7. Sequences
+
+## 8. API Gateway
+
+
+## 9. Sequences
 
 Serverless functions should by design be small nearly atomic actions. This means that a single serverless function often does not provide a lot of value. In this section we will setup a Sequence. This will alllow us to pass the returned value from one function to another. 
 
-## 8. Triggers 
+## 10. Connecting to Services
 
-## 9. Connecting to Services
+IBM Cloud has a catalog of services available to handle the needs of the enterprise. In this step we will connect our function to the Watson service to help calculate a value. 
 
-## 10. Deployment Pipelines?
-Click the button below to deploy a toolchain that automates the deployment of your serverless actions.
-[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master)
+## 11. Triggers 
+
+Triggers can be used to define conditions for the execution of a function. This can be useful for scheduling a function to execute on a certain schedule or when a certain defined limit has been reached. 
+
+
+
 
