@@ -14,7 +14,7 @@ stages:
     script: |-
       #!/bin/bash
 
-      # Package the compiled code in its distributed format (.jar) and store 
+      # Package the compiled code in its distributed format (.jar) and store
       # it in the 'target' output directory
       mvn -B package
 
@@ -42,8 +42,8 @@ stages:
     script: |-
       #!/bin/bash
 
-      ibmcloud login -r eu-gb --apikey ${PIPELINE_BLUEMIX_API_KEY}
-      ibmcloud target --cf -o ${CF_ORG} -s ${CF_SPACE}
+      ibmcloud login -a ${CF_TARGET_URL} --apikey ${PIPELINE_BLUEMIX_API_KEY}
+      ibmcloud target --cf-api ${CF_TARGET_URL} -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
       # Fetch auth credentials
@@ -54,7 +54,7 @@ stages:
       ibmcloud fn api list
 
       ################################################################
-      # Deploy 
+      # Deploy
       ################################################################
 
       echo "Running wskdeploy..."
