@@ -401,11 +401,13 @@ With these steps we have created a deployment pipeline. When we did this IBM Clo
 
 IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions). This overview should list the following actions
 
+![](./images/dashboard-1.png)
+
 Those actions have been created via the CLI at the start of this lab and have in the previous section been updated via the delivery pipline. The latter also defined an API that can be further explored in the API section of the dashboard, but we'll dive further into this topic in the next section. 
 
 The serverless functions functions `helloJava` and `webHello` are both written in Java. Hence, the code cannot be viewed and changed via the dashboard. They can be invoked though. Invoke the function `helloJava` by clicking the action and then click Invoke.
 
-![](./images/dashboard-1.png)
+![](./images/dashboard-2.png)
 
 As you can see the result is similar to when the function is invoked via the command line. Next, change the Input by clicking 'Change input' and the input to
 ```json
@@ -421,14 +423,16 @@ Change the value of 'name' to your own name, or something you like and click App
 ```
 Next, return to the actions dashboard. 
 
-### (OPTIONAL) Create a new action via the Cloud Functions dashboard
+### OPTIONAL: Create a new action via the Cloud Functions dashboard
 If you want to explore what the possibilities are when creating cloud functions via the UI, click the 'Create' button. In the next page, you can either create new triggers and/or sequences but also new actions via a quick template or from scratch. Select the Quickstart templates to continue and choose Hello World. You should see a screen similar to 
 
-![](./images/dashboard-2.png)
+![](./images/dashboard-3.png)
 
 Now select a favourite language using the dropdown (1). We've chosen for NodeJS 10 in the screenshot above. Click Deploy (2) to create the new action written in NodeJS. It outputs practically the same as our `helloJava` function. When no input is given, the function returns 
-`"greeting": "Hello stranger!"` 
-When there is input, the result is the same as for the `helloJava`. Please see for yourself by invoking the `hello-world` action with input as well. Now let's add some more value to our serverless functions by looking into sequences.
+```json
+"greeting": "Hello stranger!"
+```
+When there is input, the result is the same as for the `helloJava`. Please see for yourself by invoking the `hello-world` action with some input as well. Next, let's add more value to our serverless functions by defining sequences.
 
 ## 8. Sequences
 
