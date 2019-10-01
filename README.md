@@ -365,34 +365,6 @@ So far we have been just return JSON from our function, but functions are more f
 
 6. Like earlier, you can change the `name` query parameter to change the value being returned.
 
-## 6. Deployment Pipelines
-Now we've deployed and tested our first serverless actions via the CLI, it's time for the next step. In a real-world scenario you won't deploy your code from your laptop. Instead your code respository would be the single source of thruth, from which deployments to the serverless platform will be triggered. In this section we'll set up a so-called toolchain on IBM Cloud that enables this for us. The toolchain clones this repo to a private gitlab repo and sets up a delivery pipeline with two stages. One that builds the java code and the 2nd one that deploys the serverless action to the cloud. To create the toolchain, ctrl-click the following button
-
-[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master)
-
-This will direct you to the setup page of the toolchain. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
-
-![](./images/pipeline-1.png)
-
-In the Delivery Pipeline section, generate an API key (1) needed to deploy your code to IBM cloud. Finally, click 'Create' (2) to create the toolchain.
-
-![](./images/pipeline-2.png)
-
-The result should be similar to
-
-![](./images/pipeline-3.png)
-
-You can click the different tiles to explore e.g. the GitLab repo, raise an issue or make code changes via the Orion web editor. Now, click the Delivery Pipeline tile (1) to check out the pipeline. You should see a pipeline similar to
-
-![](./images/pipeline-4.png)
-
-Wait until all stages are successfully completed.
-
-CONGRATULATIONS...you've now successfully deployed your serverless functions using a delivery pipeline to IBM Cloud.
-
-## 7. Viewing the Functions Dashboard
-
-
 ## 6. Deployment Pipeline
 Currently we are deploying functions directly from our local computer. This process of building and deploying functions won't work with in an organization. Let's setup a deployment pipeline that will build and deploy our pipeline when we push changes to a git repository.
 
@@ -427,23 +399,52 @@ With these steps we have created a deployment pipeline. When we did this IBM Clo
 
 ## 7. Viewing the Functions Dashboard
 
-IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions)
+IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions). This overview should list the following actions
+
+Those actions have been created via the CLI at the start of this lab and have in the previous section been updated via the delivery pipline. The latter also defined an API that can be further explored in the API section of the dashboard, but we'll dive further into this topic in the next section. 
+
+The serverless functions functions `helloJava` and `webHello` are both written in Java. Hence, the code cannot be viewed and changed via the dashboard. They can be invoked though. Invoke the function `helloJava` by clicking the action and then click Invoke.
+
+![](./images/dashboard-1.png)
+
+As you can see the result is similar to when the function is invoked via the command line. Next, change the Input by clicking 'Change input' and the input to
+```json
+{
+	"name": "your name here.."
+}
+```
+Change the value of 'name' to your own name, or something you like and click Apply. Click Invoke to invoke this function with the changed input. The result should be 
+```json
+{
+  "greetings": "Hello your name here..."
+}
+```
+Next, return to the actions dashboard. 
+
+### (OPTIONAL) Create a new action via the Cloud Functions dashboard
+If you want to explore what the possibilities are when creating cloud functions via the UI, click the 'Create' button. In the next page, you can either create new triggers and/or sequences but also new actions via a quick template or from scratch. Select the Quickstart templates to continue and choose Hello World. You should see a screen similar to 
+
+![](./images/dashboard-2.png)
+
+Now select a favourite language using the dropdown (1). We've chosen for NodeJS 10 in the screenshot above. Click Deploy (2) to create the new action written in NodeJS. It outputs practically the same as our `helloJava` function. When no input is given, the function returns 
+`"greeting": "Hello stranger!"` 
+When there is input, the result is the same as for the `helloJava`. Please see for yourself by invoking the `hello-world` action with input as well. Now let's add some more value to our serverless functions by looking into sequences.
+
+## 8. Sequences
+
+Serverless functions should by design be small nearly atomic actions. This means that a single serverless function often does not provide a lot of value. In this section we will setup a Sequence. This will alllow us to pass the returned value from one function to another. Of course this sequence can be created using the Cloud Functions UI, but in this section we will be doing this by updating the so-called openwhisk manifest.yml and let the push to the clone GitLab repo trigger the delivery pipeline to deploy the changes.
 
 
 
+## 9. Triggers 
 
+Triggers can be used to define conditions for the execution of a function. This can be useful for scheduling a function to execute on a certain schedule or when a certain defined limit has been reached.
 
-## 8. API Gateway
+## 10. API Gateway
 
-
-## 9. Sequences
-
-Serverless functions should by design be small nearly atomic actions. This means that a single serverless function often does not provide a lot of value. In this section we will setup a Sequence. This will alllow us to pass the returned value from one function to another.
-
-## 10. Connecting to Services
+## 11. Connecting to Services
 
 IBM Cloud has a catalog of services available to handle the needs of the enterprise. In this step we will connect our function to the Watson service to help calculate a value.
 
-## 11. Triggers
+**Collaborator:** Pratik Patel [Github](https://github.com/prpatel) [Twitter](https://twitter.com/prpatel)
 
-Triggers can be used to define conditions for the execution of a function. This can be useful for scheduling a function to execute on a certain schedule or when a certain defined limit has been reached.
