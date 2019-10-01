@@ -367,7 +367,9 @@ So far we have been just return JSON from our function, but functions are more f
 
 ## 6. Deployment Pipelines
 Now we've deployed and tested our first serverless actions via the CLI, it's time for the next step. In a real-world scenario you won't deploy your code from your laptop. Instead your code respository would be the single source of thruth, from which deployments to the serverless platform will be triggered. In this section we'll set up a so-called toolchain on IBM Cloud that enables this for us. The toolchain clones this repo to a private gitlab repo and sets up a delivery pipeline with two stages. One that builds the java code and the 2nd one that deploys the serverless action to the cloud. To create the toolchain, ctrl-click the following button
+
 [![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master)
+
 This will direct you to the setup page of the toolchain. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
 
 ![](./images/pipeline-1.png)
