@@ -399,17 +399,21 @@ With these steps we have created a deployment pipeline. When we did this IBM Clo
 
 ## 7. Viewing the Functions Dashboard
 
-IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions). This overview should list the following actions
+IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions). It should list the following actions:
 
 ![](./images/dashboard-1.png)
 
-Those actions have been created via the CLI at the start of this lab and have in the previous section been updated via the delivery pipline. The latter also defined an API that can be further explored in the API section of the dashboard, but we'll dive further into this topic in the next section. 
+These actions have been created via the CLI at the start of this lab. They have in the previous section been updated via the delivery pipline. The latter also defined an API that can be further explored in the API section of the dashboard. We'll dive further into that topic in the API Gateway section of this lab. 
 
-The serverless functions functions `helloJava` and `webHello` are both written in Java. Hence, the code cannot be viewed and changed via the dashboard. They can be invoked though. Invoke the function `helloJava` by clicking the action and then click Invoke.
+The serverless functions functions `helloJava` and `webHello` are both written in Java. Hence, the code cannot be viewed and changed via the dashboard. They can be invoked though. 
 
-![](./images/dashboard-2.png)
+1. Invoke the function `helloJava` by clicking the action and then click Invoke.
 
-As you can see the result is similar to when the function is invoked via the command line. Next, change the Input by clicking 'Change input' and the input to
+	![](./images/dashboard-2.png)
+
+As you can see the result is similar to when the function is invoked via the command line. 
+
+2. Next, change the Input by clicking 'Change input' and the input to
 ```json
 {
 	"name": "your name here.."
@@ -421,7 +425,7 @@ Change the value of 'name' to your own name, or something you like and click App
   "greetings": "Hello your name here..."
 }
 ```
-Next, return to the actions dashboard. 
+Finally, return to the actions dashboard. 
 
 ### OPTIONAL: Create a new action via the Cloud Functions dashboard
 If you want to explore what the possibilities are when creating cloud functions via the UI, click the 'Create' button. In the next page, you can either create new triggers and/or sequences but also new actions via a quick template or from scratch. Select the Quickstart templates to continue and choose Hello World. You should see a screen similar to 
