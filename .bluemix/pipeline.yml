@@ -14,7 +14,7 @@ stages:
     script: |-
       #!/bin/bash
 
-      # Package the compiled code in its distributed format (.jar) and store 
+      # Package the compiled code in its distributed format (.jar) and store
       # it in the 'target' output directory
       mvn -B package
 
@@ -54,7 +54,7 @@ stages:
       ibmcloud fn api list
 
       ################################################################
-      # Deploy 
+      # Deploy
       ################################################################
 
       echo "Running wskdeploy..."
