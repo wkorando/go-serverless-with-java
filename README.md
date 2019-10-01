@@ -365,26 +365,47 @@ So far we have been just return JSON from our function, but functions are more f
 
 6. Like earlier, you can change the `name` query parameter to change the value being returned.
 
+## 6. Deployment Pipelines
+Now we've deployed and tested our first serverless actions via the CLI, it's time for the next step. In a real-world scenario you won't deploy your code from your laptop. Instead your code respository would be the single source of thruth, from which deployments to the serverless platform will be triggered. In this section we'll set up a so-called toolchain on IBM Cloud that enables this for us. The toolchain clones this repo to a private gitlab repo and sets up a delivery pipeline with two stages. One that builds the java code and the 2nd one that deploys the serverless action to the cloud. To create the toolchain, ctrl-click the following button
+[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master)
+This will direct you to the setup page of the toolchain. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
 
-## 6. Viewing the Functions Dashboard
+![](./images/pipeline-1.png)
+
+In the Delivery Pipeline section, generate an API key (1) needed to deploy your code to IBM cloud. Finally, click 'Create' (2) to create the toolchain. 
+
+![](./images/pipeline-2.png)
+
+The result should be similar to 
+
+![](./images/pipeline-3.png)
+
+You can click the different tiles to explore e.g. the GitLab repo, raise an issue or make code changes via the Orion web editor. Now, click the Delivery Pipeline tile (1) to check out the pipeline. You should see a pipeline similar to
+
+![](./images/pipeline-4.png)
+
+Wait until all stages are successfully completed.
+
+CONGRATULATIONS...you've now successfully deployed your serverless functions using a delivery pipeline to IBM Cloud. 
+
+## 7. Viewing the Functions Dashboard
+
+
 
 IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions)
 
 **Collaborator:** Pratik Patel [Github](https://github.com/prpatel) [Twitter](https://twitter.com/prpatel)
 
-## API Gateway
+## 8. API Gateway
 
 
 
-## 7. Sequences
+## 8. Sequences
 
 Serverless functions should by design be small nearly atomic actions. This means that a single serverless function often does not provide a lot of value. In this section we will setup a Sequence. This will alllow us to pass the returned value from one function to another. 
 
-## 8. Triggers 
+## 9. Triggers 
 
-## 9. Connecting to Services
+## 10. Connecting to Services
 
-## 10. Deployment Pipelines?
-Click the button below to deploy a toolchain that automates the deployment of your serverless actions.
-[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master)
 
