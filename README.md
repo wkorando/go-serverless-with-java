@@ -481,7 +481,7 @@ So, what are those Fibonacci numbers again??
 >  
 >F<sub>0</sub> = 0,&nbsp;&nbsp;_F_<sub>1</sub> = 1 
 >  
-and 
+>and 
 >  
 >_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub> for _n_ > 2
 >  
