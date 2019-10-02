@@ -477,21 +477,9 @@ Serverless functions should, by design, be small nearly atomic actions. This mea
 
 So, what are those Fibonacci numbers again??
 
->In mathematics, the Fibonacci numbers, commonly denoted _F_<sub>n</sub> form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+>In mathematics, the Fibonacci numbers, commonly denoted _F_<sub>n</sub> form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is, F_<sub>0</sub> = 0, _F_<sub>1</sub> = 1 and _F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub> for _n_ > 2. The beginning of the sequence is thus: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144,...
 >  
->_F_<sub>0</sub> = 0, _F_<sub>1</sub> = 1
->  
->and
->  
->_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub>
->  
->for _n_ > 2.
->  
->The beginning of the sequence is thus:
->  
->0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
->  
->Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the nth Fibonacci number in terms of n and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. 
+>Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. 
 >  
 >Source: https://en.wikipedia.org/wiki/Fibonacci_number
 
