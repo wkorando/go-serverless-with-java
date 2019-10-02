@@ -392,6 +392,40 @@ Currently we are deploying functions directly from our local computer. This proc
 
 If you want, you can click the build or deploy stage to further look into the details (build logs, deployment logs, etc.). When all stages are finished -- as depicted above -- you're ready to check out the serverless actions in the Cloud Functions dashboard. Whenever we push changes to our newly created GitLab repo, this will kick off the deployment pipeline to update the serverless actions.
 
+### manifest.yml
+
+So far we have been defining the behavior of the functions we have been deploying through the IBM Cloud CLI. This isn't ideal as changes could be forgotten or lost. Instead of using the CLI to define this behavior, we will using the [manifest.yml](mainfest.yml). This will allow us to keep the configuration of our functions in the same location as the code. This is a concept called [configuration-as-code](https://rollout.io/blog/configuration-as-code-everything-need-know/).
+
+Currently the manifest.yml looks like this: 
+
+```
+packages:
+  default:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      functionHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.FunctionApp
+      webHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.WebHello      
+        web-export: true
+``` 
+
+In the above yaml `functionHello` & `webHello` are defining the namesoof our functions, the fields under them are defining the type of function, where the function is located, the main class, and if should be web enabled (default is false). We will continue to work with the manifest.yml going forward int the workshop, but you can read more about it [here](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-deploy).
+
+### Running Locally
+
+For time and convenience we will be using the web based IDE, but if you prefer completing the following steps on your local machince eapnd the section below. 
+
+<details>
+  <summary>Click to expand</summary>
+  https://[region].git.cloud.ibm.com/profile/personal_access_tokens
+</details> 
+
 ## 7. Viewing the Functions Dashboard
 
 IBM Cloud provides a convenient dashboard for viewing your functions. You can access this dashboard here: [https://cloud.ibm.com/functions/actions](https://cloud.ibm.com/functions/actions). It should list the following actions:
@@ -440,12 +474,40 @@ When there is input, the result is the same as for the `helloJava`. Please see f
 Serverless functions should by design be small nearly atomic actions. This means that a single serverless function often does not provide a lot of value. In this section we will setup a Sequence. This will alllow us to pass the returned value from one function to another. Of course this sequence can be created using the Cloud Functions UI, but in this section we will be doing this by updating the so-called openwhisk manifest.yml and let the push to the clone GitLab repo trigger the delivery pipeline to deploy the changes.
 
 
+## 9. API Gateway
 
-## 9. Triggers 
+An API Gateway can be a great way to make your functions more accessible and to monitor their usage. Let's update our function to make it accessible through the API Gateway IBM Cloud provides. 
+
+Let's update the `webHello` function we created earlier to be accessible through API Gateway. 
+
+**Note:** For a function to be accessible through the API it must also be enabled as a web action.
+
+1. We will need to append to the end of **manifest.yml** the following:
+
+	```
+	apis:
+	  webHello: #Endpoint ID
+	    web: #API Basepath
+	      hello: #Endpoint Path
+	        webHello: #Function Reference
+	          method: GET
+	          response: http
+	```
+2. Commit and push these changes to start the deployment pipeline
+3. Once the build has completed open the [Functions API Management](https://cloud.ibm.com/functions/apimanagement) page and click the **webHello** row. It should look something like this:
+	![](images/view_api.png)
+4. This opens the management page for the API endpoint. Under route is the route to the endpoint, copy that value and append the endpoint path to it `/hello` and that will call execute the `webHello` function. Like earlier you can add a query param `?name=JFall` to it as well. 
+
+### Rate Limiting 
+
+There are a number of ways you can configure your API. A common one would be rate limiting. Because with functions you are paying for every CPU cycle, limiting the number of times a function can be executed can be a great way of making sure you don't get stuck with a huge bill at the end of the month because a script or application got stuck in an endless loop. 
+
+
+## 10. Triggers 
 
 Triggers can be used to define conditions for the execution of a function. This can be useful for scheduling a function to execute on a certain schedule or when a certain defined limit has been reached.
 
-## 10. API Gateway
+
 
 ## 11. Connecting to Services
 

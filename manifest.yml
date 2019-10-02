@@ -14,10 +14,3 @@ packages:
         runtime: java
         main: com.example.WebHello      
         web-export: true
-    apis:
-      webHello:
-        web:
-          hello:
-            webHello:
-              method: GET
-              response: http
