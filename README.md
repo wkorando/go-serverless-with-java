@@ -477,11 +477,15 @@ Serverless functions should, by design, be small nearly atomic actions. This mea
 
 So, what are those Fibonacci numbers again??
 
->In mathematics, the Fibonacci numbers, commonly denoted _F_<sub>n</sub> form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. 
+>In mathematics, the Fibonacci numbers, commonly denoted _F_<sub>n</sub> form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
 >  
->That is, F<sub>0</sub> = 0, _F_<sub>1</sub> = 1 and _F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub> for _n_ > 2. The beginning of the sequence is thus: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144,...
+>F<sub>0</sub> = 0,&nbsp;&nbsp;_F_<sub>1</sub> = 1 
 >  
->Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. If you want to read more on this topic, please visit the source of this quote: https://en.wikipedia.org/wiki/Fibonacci_number
+and 
+>  
+>_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub> for _n_ > 2
+>  
+>Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibonacci_number) page on this topic.
 
 1. Our first action returns for a given number _n_, the _n_<sup>th</sup> Fibonacci number and its immediate predecessor. For this, go to your [toolchain](https://cloud.ibm.com/devops/toolchains) in IBM Cloud and open the Orion Web IDE. Then browse in the 'go-serverless-with-java' repo to the Java source code location (1) and right-click to create a new file (2). Name this file `FibonacciNumber.java`.
 
