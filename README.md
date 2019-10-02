@@ -628,11 +628,11 @@ So, what are those Fibonacci numbers again??
 6. The new serverless functions have been added to the manifest YAML. The sequence is added in a similar way. Look at the following piece of config:
 	```yaml
 	sequences:
-	   	ratio:
-			actions: fibonacciNumber, calculateRatio
-		ratioWeb:
-			actions: fibonacciNumber, calculateRatioWeb
-			web: true
+	   ratio:
+	      actions: fibonacciNumber, calculateRatio
+	   ratioWeb:
+	      actions: fibonacciNumber, calculateRatioWeb
+	      web: true
 	```
 	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should be on the same level as the 'actions' under the 'golden-ratio' package. This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. Then, the output of this action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
 
