@@ -483,7 +483,7 @@ So, what are those Fibonacci numbers again??
 >  
 >and 
 >  
->_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub> for _n_ > 2
+>_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub>&nbsp;&nbsp;for&nbsp;&nbsp;_n_ > 2
 >  
 >Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibonacci_number) page on this topic.
 
