@@ -452,7 +452,7 @@ These actions have been created via the CLI at the start of this lab. They have 
 	Change the value of 'name' to your own name, or something you like and click Apply. Click Invoke to invoke this function with the changed input. The result should be 
 	```json
 	{
-	"greetings": "Hello your name here..."
+		"greetings": "Hello your name here..."
 	}
 	```
 	Finally, return to the actions dashboard. 
