@@ -610,19 +610,19 @@ So, what are those Fibonacci numbers again??
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio' and that we also added an action that also calculates the ratio, but returns HTML instead of JSON.
 	```yaml
 	golden-ratio:
-		actions:
-		fibonacciNumber:
-			function: hello-world-java.jar
-			runtime: java
-			main: com.example.FibonacciNumber
-		calculateRatio:
-			function: hello-world-java.jar
-			runtime: java
-			main: com.example.CalculateRatio
-		calculateRatioWeb:
-			function: hello-world-java.jar
-			runtime: java
-			main: com.example.CalculateRatioWeb        
+	   actions:
+	      fibonacciNumber:
+	         function: hello-world-java.jar
+	         runtime: java
+	         main: com.example.FibonacciNumber
+	      calculateRatio:
+	         function: hello-world-java.jar
+	         runtime: java
+	         main: com.example.CalculateRatio
+	      calculateRatioWeb:
+	         function: hello-world-java.jar
+	         runtime: java
+	         main: com.example.CalculateRatioWeb        
 	```
 
 6. The new serverless functions have been added to the manifest YAML. The sequence is added in a similar way. Look at the following piece of config:
