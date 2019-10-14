@@ -165,10 +165,9 @@ So, what are those Fibonacci numbers again??
 
 ![](./images/git-sync-with-master.png)
 
-	Once the two stages in the pipeline successfully completed, go to [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package 'golden-ratio' has been defined, showing the 3 new actions and 2 new sequences. 
+Once the two stages in the pipeline successfully completed, go to the [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package 'golden-ratio' has been defined, showing the 3 new actions and 2 new sequences. 
 
 ![](./images/cloud-functions.png)
-
 
 <p  align="center">
 	<font size="4">
