@@ -126,7 +126,7 @@ So, what are those Fibonacci numbers again??
 
 4. Now the two new functions have been defined, it is time to update the OpenWhisk manifest YAML. In this config file we need to define the two new actions, as well as the sequence. For this, in the Web IDE open the `manifest.yml` file (1).
 
-![](./images/update-manifest.png)
+	![](./images/update-manifest.png)
 
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Note that we've also added an action that also calculates the ratio, but returns HTML instead of JSON.
 	```yaml
@@ -159,15 +159,15 @@ So, what are those Fibonacci numbers again??
 
 7. It's time to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click 'Commit'.
 
-![](./images/git-commit-changes.png)
+	![](./images/git-commit-changes.png)
 
 8. Finally, click 'Sync' (1) to push the changes to the master branch. Next, click the 'Back to Toolchains' button (2) to return to the toolchain overview page. Select the 'Delivery Pipeline' tile to monitor the progress of your new build. The pipeline got triggered by the push of your changes to the master branch.
 
-![](./images/git-sync-with-master.png)
-	
+	![](./images/git-sync-with-master.png)
+
 	Once the two stages in the pipeline successfully completed, go to the [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package 'golden-ratio' has been defined, showing the 3 new actions and 2 new sequences. 
 
-![](./images/cloud-functions.png)
+	![](./images/cloud-functions.png)
 
 <p  align="center">
 	<font size="4">
