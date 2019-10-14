@@ -128,7 +128,7 @@ So, what are those Fibonacci numbers again??
 
 ![](./images/update-manifest.png)
 
-5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio' and that we also added an action that also calculates the ratio, but returns HTML instead of JSON.
+5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Note that we've also added an action that also calculates the ratio, but returns HTML instead of JSON.
 	```yaml
 	golden-ratio:
 	   actions:
@@ -155,9 +155,20 @@ So, what are those Fibonacci numbers again??
 	      actions: fibonacciNumber, calculateRatioWeb
 	      web: true
 	```
-	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should be on the same level as the 'actions' under the 'golden-ratio' package. This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. Then, the output of this action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
+	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should be on the same level as the 'actions' under the 'golden-ratio' package. This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. The output of the `fibonacciNumber` action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
 
-7. It's time to commit our changes to the GitLab repo and push them the master branch.
+7. It's time to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click 'Commit'.
+
+![](./images/git-commit-changes.png)
+
+8. Finally, click 'Sync' (1) to push the changes to the master branch. Next, click the 'Back to Toolchains' button (2) to return to the toolchain overview page. Select the 'Delivery Pipeline' tile to monitor the progress of your new build. The pipeline got triggered by the push of your changes to the master branch.
+
+![](./images/git-sync-with-master.png)
+
+	Once the two stages in the pipeline successfully completed, go to [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package 'golden-ratio' has been defined, showing the 3 new actions and 2 new sequences. 
+
+![](./images/cloud-functions.png)
+
 
 <p  align="center">
 	<font size="4">
