@@ -31,49 +31,49 @@ So, what are those Fibonacci numbers again??
 	import com.google.gson.JsonPrimitive;
 
 	public class FibonacciNumber {
-		protected static final Logger logger = Logger.getLogger("basic");
+	   protected static final Logger logger = Logger.getLogger("basic");
 
-		public static JsonObject main (JsonObject args) {
-			JsonObject response = new JsonObject();
-			JsonPrimitive numberArg = args.getAsJsonPrimitive("number");
+	   public static JsonObject main (JsonObject args) {
+	      JsonObject response = new JsonObject();
+	      JsonPrimitive numberArg = args.getAsJsonPrimitive("number");
 			
-			try {
-				int n = numberArg.getAsInt();
+	      try {
+	         int n = numberArg.getAsInt();
 
-				// Special case: F(0) = 0 by definition
-				if (n == 0) {
-					response.addProperty("input", n);
-					response.addProperty("output", 0);
+	         // Special case: F(0) = 0 by definition
+	         if (n == 0) {
+	            response.addProperty("input", n);
+	            response.addProperty("output", 0);
 
-					return response;
-				}
+	            return response;
+	        }
 
-				// Initialize counters to calculate n-th Fibonacci number
-				BigInteger a = BigInteger.ZERO;
-				BigInteger b = BigInteger.ONE;
-				BigInteger c;
+	        // Initialize counters to calculate n-th Fibonacci number
+	        BigInteger a = BigInteger.ZERO;
+	        BigInteger b = BigInteger.ONE;
+	        BigInteger c;
 				
-				// Start iterating & calculate the sum of the two previous numbers
-				for (int i = 2; i <= n; i++) {
-					c = a.add(b);
-					a = b;
-					b = c;
-				}
+	        // Start iterating & calculate the sum of the two previous numbers
+	        for (int i = 2; i <= n; i++) {
+	           c = a.add(b);
+	           a = b;
+	           b = c;
+	        }
 
-				// Construct response JSON. The response contains the input parameter, as well as the n-th and (n-1)-th Fibonacci number
-				response.addProperty("input", n);
-				response.addProperty("output1", a);
-				response.addProperty("output2", b);
-			} catch (Exception e) {
-				throw new Error(e.getMessage());
-			}
+	        // Construct response JSON. The response contains the input parameter, as well as the n-th and (n-1)-th Fibonacci number
+	        response.addProperty("input", n);
+	        response.addProperty("output1", a);
+	        response.addProperty("output2", b);
+	      } catch (Exception e) {
+             throw new Error(e.getMessage());
+	      }
 
-			return response;
-		}  
+	      return response;
+	   }  
 	}
 	```
 
-2. The second function should calculate the ratio of two given numbers. For this, create a new Java file `CalculateRatio.java` in same location as where you created the file `FibonacciNumber.java`.
+2. The second function should calculate the ratio of two given numbers. For this, create a new Java file `CalculateRatio.java` in the same location as where you created the file `FibonacciNumber.java`.
 
 3. Next, copy the code below and paste it on line 1 of the file `CalculateRatio.java` in the Web IDE.
 
@@ -85,50 +85,50 @@ So, what are those Fibonacci numbers again??
 	import com.google.gson.JsonObject;
 
 	public class CalculateRatio {
-		protected static final Logger logger = Logger.getLogger("basic");
+	   protected static final Logger logger = Logger.getLogger("basic");
 
-		public static JsonObject main (JsonObject args) {
-			JsonObject response = new JsonObject();      
-			int n = args.getAsJsonPrimitive("input").getAsInt();     
-			BigDecimal arg1 = new BigDecimal(1);
-			BigDecimal arg2 = new BigDecimal(1);
-			BigDecimal ratio = new BigDecimal(1);
+	   public static JsonObject main (JsonObject args) {
+	      JsonObject response = new JsonObject();      
+	      int n = args.getAsJsonPrimitive("input").getAsInt();     
+	      BigDecimal arg1 = new BigDecimal(1);
+	      BigDecimal arg2 = new BigDecimal(1);
+	      BigDecimal ratio = new BigDecimal(1);
 
-			try {
-				// Obtain the two numbers from the input
-				if (n == 0) {
-					throw new ArithmeticException("Cannot calculate the golden ratio of just one Fibonnaci number. Need at least two!!");
-				} else {
-					arg1 = args.getAsJsonPrimitive("output1").getAsBigDecimal();
-					arg2 = args.getAsJsonPrimitive("output2").getAsBigDecimal();            
+	      try {
+	         // Obtain the two numbers from the input
+	         if (n == 0) {
+	            throw new ArithmeticException("Cannot calculate the golden ratio of just one Fibonnaci number. Need at least two!!");
+	         } else {
+	            arg1 = args.getAsJsonPrimitive("output1").getAsBigDecimal();
+	            arg2 = args.getAsJsonPrimitive("output2").getAsBigDecimal();            
 		
-					ratio = arg2.divide(arg1);    
-				}
-			} catch (ArithmeticException e) {
-				if (n >= 2) {
-					ratio = arg2.divide(arg1, 15, BigDecimal.ROUND_CEILING);
-				} else { 
-					// For n = 1, the ratio cannot be calculated. Cannot divide by zero...
-					logger.warning(e.getMessage());
-					response.addProperty("message", "Cannot divide by zero. Provide a number greater than 1.");                
-				}
-			}
+	            ratio = arg2.divide(arg1);    
+	         }
+	      } catch (ArithmeticException e) {
+	         if (n >= 2) {
+	            ratio = arg2.divide(arg1, 15, BigDecimal.ROUND_CEILING);
+	         } else { 
+	            // For n = 1, the ratio cannot be calculated. Cannot divide by zero...
+	            logger.warning(e.getMessage());
+	            response.addProperty("message", "Cannot divide by zero. Provide a number greater than 1.");                
+	         }
+	      }
 			
-			// No error thrown and reponse does not have a message property, so calculated ratio can be added
-			if (!response.has("message")) {
-				response.addProperty("ratio", ratio);
-			}
+	      // No error thrown and reponse does not have a message property, so calculated ratio can be added
+	      if (!response.has("message")) {
+	         response.addProperty("ratio", ratio);
+	      }
 
-			return response;
-		}  
+	      return response;
+	   }  
 	} 
 	```
 
 4. Now the two new functions have been defined, it is time to update the OpenWhisk manifest YAML. In this config file we need to define the two new actions, as well as the sequence. For this, in the Web IDE open the `manifest.yml` file (1).
 
-![](./images/update-manifest.png)
+	![](./images/update-manifest.png)
 
-5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio' and that we also added an action that also calculates the ratio, but returns HTML instead of JSON.
+5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Note that we've also added an action that also calculates the ratio, but returns HTML instead of JSON.
 	```yaml
 	golden-ratio:
 	   actions:
@@ -155,9 +155,19 @@ So, what are those Fibonacci numbers again??
 	      actions: fibonacciNumber, calculateRatioWeb
 	      web: true
 	```
-	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should be on the same level as the 'actions' under the 'golden-ratio' package. This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. Then, the output of this action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
+	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should be on the same level as the 'actions' under the 'golden-ratio' package. This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. The output of the `fibonacciNumber` action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
 
-7. It's time to commit our changes to the GitLab repo and push them the master branch.
+7. It's time to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click 'Commit'.
+
+	![](./images/git-commit-changes.png)
+
+8. Finally, click 'Sync' (1) to push the changes to the master branch. Next, click the 'Back to Toolchains' button (2) to return to the toolchain overview page. Select the 'Delivery Pipeline' tile to monitor the progress of your new build. The pipeline got triggered by the push of your changes to the master branch.
+
+	![](./images/git-sync-with-master.png)
+
+	Once the two stages in the pipeline successfully completed, go to the [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package 'golden-ratio' has been defined, showing the 3 new actions and 2 new sequences. 
+
+	![](./images/cloud-functions.png)
 
 <p  align="center">
 	<font size="4">
