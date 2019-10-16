@@ -34,7 +34,7 @@ stages:
     artifact_dir: ''
     build_type: shell
     target:
-      region_id: ${REGION_ID}
+      region_id: ${CF_REGION_ID}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
       application: ${CF_APP}
@@ -42,8 +42,8 @@ stages:
     script: |-
       #!/bin/bash
 
-      ibmcloud login -a ${CF_TARGET_URL} --apikey ${PIPELINE_BLUEMIX_API_KEY}
-      ibmcloud target --cf-api ${CF_TARGET_URL} -o ${CF_ORG} -s ${CF_SPACE}
+      ibmcloud login -r ${CF_REGION_ID} --apikey ${PIPELINE_BLUEMIX_API_KEY}
+      ibmcloud target -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
       # Fetch auth credentials
