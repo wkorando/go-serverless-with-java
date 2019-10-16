@@ -28,6 +28,10 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: DEV_REGION
+    value: ${CF_REGION_ID}
+    type: text
   jobs:
   - name: Deploy
     type: deployer
@@ -41,8 +45,8 @@ stages:
       api_key: ${API_KEY}
     script: |-
       #!/bin/bash
-
-      ibmcloud login -r ${CF_REGION_ID} --apikey ${PIPELINE_BLUEMIX_API_KEY}
+      echo "logging on to ibmcloud in region: ${DEV_REGION}"
+      ibmcloud login -a cloud.ibm.com --apikey ${PIPELINE_BLUEMIX_API_KEY} -r ${DEV_REGION}
       ibmcloud target -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
