@@ -29,7 +29,7 @@ stages:
   triggers:
   - type: stage
   properties:
-  - name: DEV_REGION
+  - name: REGION
     value: ${CF_REGION_ID}
     type: text
   jobs:
@@ -45,8 +45,10 @@ stages:
       api_key: ${API_KEY}
     script: |-
       #!/bin/bash
-      echo "logging on to ibmcloud in region: ${DEV_REGION}"
-      ibmcloud login -a cloud.ibm.com --apikey ${PIPELINE_BLUEMIX_API_KEY} -r ${DEV_REGION}
+      echo "logging on to ibmcloud in region: ${REGION}"
+      REGION=$(echo $REGION |cut -f 3 -d :)
+      echo "Need only last piece of REGION"
+      ibmcloud login -a cloud.ibm.com --apikey ${PIPELINE_BLUEMIX_API_KEY} -r ${REGION}
       ibmcloud target -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
