@@ -135,30 +135,30 @@ So, what are those Fibonacci numbers again??
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Make sure the 'golden-ratio' package has the same indentation as the 'default' package.
 	```yaml
 	golden-ratio:
-	   actions:
-	      fibonacciNumber:
-	         function: hello-world-java.jar
-	         runtime: java
-	         main: com.example.FibonacciNumber
-	      calculateRatio:
-	         function: hello-world-java.jar
-	         runtime: java
-	         main: com.example.CalculateRatio
-	      calculateRatioWeb:
-	         function: hello-world-java.jar
-	         runtime: java
-	         main: com.example.CalculateRatioWeb        
+      actions:
+        fibonacciNumber:
+          function: hello-world-java.jar
+          runtime: java
+          main: com.example.FibonacciNumber
+		calculateRatio:
+          function: hello-world-java.jar
+          runtime: java
+          main: com.example.CalculateRatio
+        calculateRatioWeb:
+          function: hello-world-java.jar
+          runtime: java
+          main: com.example.CalculateRatioWeb        
 	```
 	Note that we've also added the action `CalculateRatioWeb` that also calculates the ratio, but returns HTML instead of JSON.
 
 6. The sequence is added in a similar way as the serverless that we added in the previous step. For this, look at the following piece of config:
 	```yaml
 	sequences:
-	   ratio:
-	      actions: fibonacciNumber, calculateRatio
-	   ratioWeb:
-	      actions: fibonacciNumber, calculateRatioWeb
-	      web: true
+      ratio:
+        actions: fibonacciNumber, calculateRatio
+      ratioWeb:
+        actions: fibonacciNumber, calculateRatioWeb
+        web: true
 	```
 	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the 'actions' in the 'golden-ratio' package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. The output of the `fibonacciNumber` action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
 
