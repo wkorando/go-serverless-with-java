@@ -4,7 +4,7 @@ Serverless functions should, by design, be small nearly atomic actions. This mea
 
 In this section we will set up such a sequence. A sequence allows us to pass the returned value from one function to another. The sequence that we will be creating, will consist of two functions. One that returns the _n_<sup>th</sup> Fibonnaci number and its immediate predecessor (where _n_ is the input value). The second one takes these two Fibonacci numbers as input and returns the calculated ratio of these numbers.
 
-### The Fibonacci sequence
+### The Good Old Fibonacci Numbers and its Sequence
 
 So, what are those Fibonacci numbers again??
 
@@ -16,7 +16,11 @@ So, what are those Fibonacci numbers again??
 >  
 >_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub>&nbsp;&nbsp;for&nbsp;&nbsp;_n_ > 2
 >  
->Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibonacci_number) page on this topic.
+>Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. 
+
+For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibonacci_number) page on this topic. 
+
+Now let's build a serverless action and a sequence to determine the _n_<sup>th</sup> Fibonacci number and to calculate the ratio of this number and its immediate predecessor in the Fibonacci sequence.
 
 ### Creating actions and sequences
 
