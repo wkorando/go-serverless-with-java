@@ -37,8 +37,8 @@ services:
           CF_APP: "{{form.pipeline.parameters.app-name}}"
           CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
           CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
+          CF_REGION_ID: "{{form.pipeline.parameters.dev-region}}"
           API_KEY: "{{form.pipeline.parameters.api-key}}"
-          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
         execute: true
 
   #Web IDE
@@ -51,8 +51,7 @@ form:
     schema:
       $ref: deploy.json
     parameters:
-      app-name: "{{app-name}}"
-      dev-space: "{{deploymentSpace}}"
-      dev-organization: "{{deploymentOrg}}"
-      dev-region: "{{deploymentRegion}}"
+      dev-space: "{{dev-space}}"
+      dev-organization: "{{dev-organization}}"
+      dev-region: "{{dev-region}}"
       api-key: "{{api-key}}"
