@@ -52,7 +52,7 @@ form:
       $ref: deploy.json
     parameters:
       app-name: "{{app-name}}"
-      dev-space: "{{dev-space}}"
-      dev-organization: "{{dev-organization}}"
-      dev-region: "{{dev-region}}"
+      dev-space: "{{deploymentSpace}}"
+      dev-organization: "{{deploymentOrg}}"
+      dev-region: "{{deploymentRegion}}"
       api-key: "{{api-key}}"

@@ -45,18 +45,17 @@ stages:
       api_key: ${API_KEY}
     script: |-
       #!/bin/bash
-      echo "logging on to ibmcloud in region: ${REGION}"
+      # Obtaining last portion of ibm:yp:<region> to get the <region>
       REGION=$(echo $REGION |cut -f 3 -d :)
-      echo "Need only last piece of REGION"
+      
       ibmcloud login -a cloud.ibm.com --apikey ${PIPELINE_BLUEMIX_API_KEY} -r ${REGION}
       ibmcloud target -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
-      # Fetch auth credentials
+      # Test cloud functions part of IBM Cloud CLI before deploying
       ################################################################
 
-      echo 'Retrieving Cloud Functions authorization key...'
-
+      echo 'List all entities in the current targeted namespace...'
       ibmcloud fn api list
 
       ################################################################
