@@ -22,9 +22,7 @@ For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibo
 
 Now let's build a serverless action and a sequence to determine the _n_<sup>th</sup> Fibonacci number and to calculate the ratio of this number and its immediate predecessor in the Fibonacci sequence.
 
-### Creating actions and sequences
-
-1. Our first action returns for a given number _n_, the _n_<sup>th</sup> Fibonacci number and its immediate predecessor. For this, go to your [toolchain](https://cloud.ibm.com/devops/toolchains) in IBM Cloud and open the Orion Web IDE. Then browse in the 'go-serverless-with-java' repo to the Java source code location (1) and right-click to create a new file (2). Name this file `FibonacciNumber.java`.
+1. Our first action will return the _n_<sup>th</sup> Fibonacci number and its immediate predecessor. For this, go to your [toolchain](https://cloud.ibm.com/devops/toolchains) in IBM Cloud and open the Orion Web IDE. Then browse in the 'go-serverless-with-java' repo to the Java source code location (1) and right-click to create a new file (2). Name this file `FibonacciNumber.java`.
 
 	![](./images/create-action-webide.png)
 
