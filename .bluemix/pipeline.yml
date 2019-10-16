@@ -39,10 +39,12 @@ stages:
       space: ${CF_SPACE}
       application: ${CF_APP}
       api_key: ${API_KEY}
+    env:
+      CF_REGION_ID: ${REGION_ID}
     script: |-
       #!/bin/bash
 
-      ibmcloud login -r ${REGION_ID} --apikey ${PIPELINE_BLUEMIX_API_KEY}
+      ibmcloud login -a ${CF_REGION_ID} --apikey ${PIPELINE_BLUEMIX_API_KEY}
       ibmcloud target -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
