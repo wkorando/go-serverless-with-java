@@ -4,7 +4,7 @@ Currently we are deploying functions directly from our local computer. This proc
 
 1. To create the toolchain, CTRL-click the following button:
 	
-  [![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
+    [![Deploy to IBM Cloud](./images/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
 
 2. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Dallas will be the default region when your closer to the US. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
 
