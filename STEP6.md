@@ -51,7 +51,7 @@ packages:
 
 In the above yaml `helloJava` & `webHello` are defining the names of our functions, the fields under them are defining the type of function, where the function is located, the main class, and if should be web enabled (default is false). We will continue to work with the manifest.yml going forward int the workshop, but you can read more about it [here](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-deploy).
 
-### Running Locally
+### Running Locally (NOT FILLED IN YET!!)
 
 For time and convenience we will be using the web based IDE, but if you prefer completing the following steps on your local machince eapnd the section below. 
 

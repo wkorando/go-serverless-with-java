@@ -1,8 +1,10 @@
 ## 8. Creating a Sequence
 
-Serverless functions should, by design, be small nearly atomic actions. This means that a single serverless function often provides limited value. Adding them to a sequence enables you to leverage the combined value of the individual functions. In this section we will set up such a sequence. A sequence allows us to pass the returned value from one function to another. The sequence that we will be creating, will consist of two functions. One that returns the _n_<sup>th</sup> Fibonnaci number and its immediate predecessor (where _n_ is the input value). The second one takes these two Fibonacci numbers as input and returns the calculated ratio of these numbers.
+Serverless functions should, by design, be small nearly atomic actions. This means that a single serverless function often provides limited value. Adding them to a sequence enables you to leverage the combined value of the individual functions. 
 
-### The actions for the sequence
+In this section we will set up such a sequence. A sequence allows us to pass the returned value from one function to another. The sequence that we will be creating, will consist of two functions. One that returns the _n_<sup>th</sup> Fibonnaci number and its immediate predecessor (where _n_ is the input value). The second one takes these two Fibonacci numbers as input and returns the calculated ratio of these numbers.
+
+### The Fibonacci sequence
 
 So, what are those Fibonacci numbers again??
 
@@ -15,6 +17,8 @@ So, what are those Fibonacci numbers again??
 >_F_<sub>n</sub> = _F_<sub>n-1</sub> + _F_<sub>n-2</sub>&nbsp;&nbsp;for&nbsp;&nbsp;_n_ > 2
 >  
 >Fibonacci numbers are strongly related to the golden ratio: Binet's formula expresses the _n_<sup>th</sup> Fibonacci number in terms of _n_ and the golden ratio, and implies that the ratio of two consecutive Fibonacci numbers tends to the golden ratio as n increases. For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibonacci_number) page on this topic.
+
+### Creating actions and sequences
 
 1. Our first action returns for a given number _n_, the _n_<sup>th</sup> Fibonacci number and its immediate predecessor. For this, go to your [toolchain](https://cloud.ibm.com/devops/toolchains) in IBM Cloud and open the Orion Web IDE. Then browse in the 'go-serverless-with-java' repo to the Java source code location (1) and right-click to create a new file (2). Name this file `FibonacciNumber.java`.
 
@@ -128,7 +132,7 @@ So, what are those Fibonacci numbers again??
 
 	![](./images/update-manifest.png)
 
-5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Note that we've also added an action that also calculates the ratio, but returns HTML instead of JSON.
+5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Make sure the 'golden-ratio' package has the same indentation as the 'default' package.
 	```yaml
 	golden-ratio:
 	   actions:
@@ -145,8 +149,9 @@ So, what are those Fibonacci numbers again??
 	         runtime: java
 	         main: com.example.CalculateRatioWeb        
 	```
+	Note that we've also added the action `CalculateRatioWeb` that also calculates the ratio, but returns HTML instead of JSON.
 
-6. The new serverless functions have been added to the manifest YAML. The sequence is added in a similar way. Look at the following piece of config:
+6. The sequence is added in a similar way as the serverless that we added in the previous step. For this, look at the following piece of config:
 	```yaml
 	sequences:
 	   ratio:
@@ -155,9 +160,9 @@ So, what are those Fibonacci numbers again??
 	      actions: fibonacciNumber, calculateRatioWeb
 	      web: true
 	```
-	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should be on the same level as the 'actions' under the 'golden-ratio' package. This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. The output of the `fibonacciNumber` action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
+	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the 'actions' in the 'golden-ratio' package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. The output of the `fibonacciNumber` action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
 
-7. It's time to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click 'Commit'.
+7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click 'Commit'.
 
 	![](./images/git-commit-changes.png)
 
