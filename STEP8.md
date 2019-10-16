@@ -140,7 +140,7 @@ So, what are those Fibonacci numbers again??
           function: hello-world-java.jar
           runtime: java
           main: com.example.FibonacciNumber
-		calculateRatio:
+        calculateRatio:
           function: hello-world-java.jar
           runtime: java
           main: com.example.CalculateRatio
