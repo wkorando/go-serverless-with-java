@@ -22,7 +22,7 @@
       "type": "string"
     }
   },
-  "required": ["dev-region", "dev-organization", "dev-space"],
+  "required": ["api-key", "dev-region", "dev-organization", "dev-space"],
   "form": [{
       "type": "validator",
       "url": "/devops/setup/bm-helper/helper.html"

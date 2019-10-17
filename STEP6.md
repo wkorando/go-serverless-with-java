@@ -4,7 +4,7 @@ Currently we are deploying functions directly from our local computer. This proc
 
 1. To create the toolchain, CTRL-click the following button:
 	
-	[![Deploy to IBM Cloud](https://cloud.ibm.com/devops/setup/deploy/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/wkorando/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
+    [![Deploy to IBM Cloud](./images/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
 
 2. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Dallas will be the default region when your closer to the US. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
 
@@ -51,7 +51,7 @@ packages:
 
 In the above yaml `helloJava` & `webHello` are defining the names of our functions, the fields under them are defining the type of function, where the function is located, the main class, and if should be web enabled (default is false). We will continue to work with the manifest.yml going forward int the workshop, but you can read more about it [here](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-deploy).
 
-### Running Locally
+### Running Locally (NOT FILLED IN YET!!)
 
 For time and convenience we will be using the web based IDE, but if you prefer completing the following steps on your local machince eapnd the section below. 
 

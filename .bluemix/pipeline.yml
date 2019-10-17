@@ -28,29 +28,34 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: REGION
+    value: ${CF_REGION_ID}
+    type: text
   jobs:
   - name: Deploy
     type: deployer
     artifact_dir: ''
-    build_type: shell
+    deploy_type: cf
     target:
-      region_id: ${REGION_ID}
+      region_id: ${CF_REGION_ID}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
       application: ${CF_APP}
       api_key: ${API_KEY}
     script: |-
       #!/bin/bash
-
-      ibmcloud login -a ${CF_TARGET_URL} --apikey ${PIPELINE_BLUEMIX_API_KEY}
-      ibmcloud target --cf-api ${CF_TARGET_URL} -o ${CF_ORG} -s ${CF_SPACE}
+      # Obtaining last portion of ibm:yp:<region> to get the <region>
+      REGION=$(echo $REGION |cut -f 3 -d :)
+      
+      ibmcloud login -a cloud.ibm.com --apikey ${PIPELINE_BLUEMIX_API_KEY} -r ${REGION}
+      ibmcloud target -o ${CF_ORG} -s ${CF_SPACE}
 
       ################################################################
-      # Fetch auth credentials
+      # Test cloud functions part of IBM Cloud CLI before deploying
       ################################################################
 
-      echo 'Retrieving Cloud Functions authorization key...'
-
+      echo 'List all entities in the current targeted namespace...'
       ibmcloud fn api list
 
       ################################################################

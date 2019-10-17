@@ -37,7 +37,7 @@ public class CalculateRatioWeb {
                     "<script src=\"https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>" +
                     "<script id=\"MathJax-script\" async src=\"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\"></script>" +    
                     "<body><h1>Calculate the Golden Ratio</h1>" + 
-                    "Please ask for the \\(n^{th}\\) Fibonnaci number \\((n \\ge 2)\\) to prevent dividing by zero." +                    
+                    "Please \\((n \\ge 2)\\) to prevent dividing by zero..." +                    
                     "</body></html>"
                 );
             }
@@ -53,18 +53,17 @@ public class CalculateRatioWeb {
                 "The golden ratio is the limit of the ratios of successive terms of the Fibonacci sequence (or any Fibonacci-like sequence)" +
                 "$$ \\lim_{n \\to \\infty } {F_{n+1} \\over F_{n}} = \\varphi $$" +
                 "In other words, if a Fibonacci number is divided by its immediate predecessor in the sequence, the quotient approximates \\(\\varphi\\)." +
-                "<p>Now let's calculate the ratio of the two Fibonacci numbers that were passed as input parameters." + 
+                "<p>source: <a href=\"https://en.wikipedia.org/wiki/Golden_ratio\">https://en.wikipedia.org/wiki/Golden_ratio</a></p>" +
                 "<br><br><h3>Input parameters</h3>" +
-                "<p>The following input has been received</p>" +
+                "<p>Now, let's calculate the ratio of the two Fibonacci numbers that were passed as input parameters. The following input has been received:</p>" + 
                 "<pre>{<br>" +
                 "   \"input\": " + n + ",<br>" +
                 "   \"output1\": " + arg1 + ",<br>" + 
                 "   \"output2\": " + arg2 + "<br>" +   
                 "}</pre>" + 
                 "<p>For \\(n = " + n + "\\), the \\(n^{th}\\) Fibonacci number is \\(F_{" + n + "} =  " + arg2 + "\\) and its immediate predecessor \\(F_{" + (n - 1) + "} = " + arg1 + "\\)." +  
-                "&nbsp;The ratio between these two numbers is</p>" +
+                "&nbsp;The ratio between these two numbers is:</p>" +
                 "$$ \\frac{F_{n+1}}{F_{n}} = \\frac{" + arg2 + "}{" + arg1 + "} " + relOperator + " " + ratio + "$$" +
-                "<p>source: <a href=\"https://en.wikipedia.org/wiki/Golden_ratio\">https://en.wikipedia.org/wiki/Golden_ratio</a></p>" +
                 "</body></html>"
             );    
         }
