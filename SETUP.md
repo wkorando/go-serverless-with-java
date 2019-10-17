@@ -40,6 +40,6 @@ You will need the following to complete this workshop:
 	``` 	
 <p  align="center">
 	<font size="4">
- 		<a href="README.md">Index</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="STEP1.md">Next >></a></td>
+ 		<a href="README.md"><< Back</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="README.md">Index</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="STEP1.md">Next >></a></td>
  </font>
 </p>

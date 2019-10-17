@@ -30,6 +30,10 @@ In this workshop we will look at how to write Serverless Functions in Java and r
 
 ### [11. Creating a Trigger](STEP11.md)
 
-
+<p  align="center">
+	<font size="4">
+ 		<a href="SETUP.md">Next >></a></td>
+ </font>
+</p>
 
 
