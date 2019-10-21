@@ -15,7 +15,7 @@ Let's update the `ratioWeb` sequence we created earlier to be accessible through
           ratio: #Endpoint Path
             ratio: #Function Reference
               method: GET
-			  response: json
+              response: json
 	```
 	
 	Again, make sure the `apis` section has the same indentation as the `actions` and `sequences` sections of the **manifest.yml**.
@@ -26,25 +26,25 @@ Let's update the `ratioWeb` sequence we created earlier to be accessible through
 
 	![](images/view_api.png)
 
-4. This opens the management page for the API endpoint. Under route is the route to the endpoint. Copy that value and append the endpoint path `ratio?number=5` to it. This will execute the `ratio` function with the query parameter `number` set to 5. Test some other numbers as well and look how this impacts the golden ratio.
+4. This opens the management page for the API endpoint. Under route is the route to the endpoint. Copy that value and append the endpoint path `ratio?number=5` to it. This will execute the `ratio` function with the query parameter `number` set to 5. Test some other numbers as well and look how this changes the ratio. The bigger the number, the closer it gets to the golden ratio.
 
 ### Rate Limiting 
 
 There are a number of ways you can configure your API. A common one would be rate limiting. Because with functions you are paying for every CPU cycle, limiting the number of times a function can be executed can be a great way of making sure you don't get stuck with a huge bill at the end of the month because e.g. a script or application got stuck in an endless loop. 
 
-1. As rate limiting is measured per API key, we first need to set security on the API so that we can create a key to access `ratioAPI`. For this, click the API on the [Functions API Management](https://cloud.ibm.com/functions/apimanagement) page.
+1. As rate limiting is measured per API key, we first need to set security on the API and create a key to access our API. For this, click the API on the [Functions API Management](https://cloud.ibm.com/functions/apimanagement) page.
 	
 	![](images/api_definition.png)
 
-	Next, click 'Definitions' (1) on the left-hand side. Then, in the 'Security and Rate Limiting' section, turn on both **Require applications to authenticate via API key** (2) and the **Limit API call rate on a per-key basis** switches. Set **Maximum calls** to 20 and the **Unit of time** to Minute. Finally,scroll to the bottom of the page and click 'Save' to save the changes.
+	Next, click **Definitions** (1) on the left-hand side. Then, in the **Security and Rate Limiting** section, turn on both **Require applications to authenticate via API key** (2) and the **Limit API call rate on a per-key basis** (3) switches. Set **Maximum calls** to 20 and the **Unit of time** to Minute. Finally, scroll to the bottom of the page and click 'Save' to save the changes.
 
 2. Now that the rate limiting and the security are set, we need a key so that we can call the API. For this, select the 'Sharing' tab (1) on the lef-hand side of the page.
 
-	![](images/api_definition.png)
+	![](images/cloud_api_key-1.png)
 
 	Click 'Create API key' (2) under **Sharing Outside of Cloud Foundry organization** and provide a name for the key. Click 'Create' to complete the creation of the key.
 
-	![](images/api_definition.png)
+	![](images/cloud_api_key-1.png)
 
 3. Next, we will be using `curl` and some basic `bash` scripting skills to demonstrate the working of rate limiting on our API. For this, first call the API once and check the result.
 	```bash
@@ -55,17 +55,17 @@ There are a number of ways you can configure your API. A common one would be rat
 	
 	```json
 	{
-		"ratio": 1.666666666666667
+	   "ratio": 1.666666666666667
 	}
 	```
 	
-	A rate limit of 20 calls per minute will be translated to one every 3 seconds. So, if we define a loop that calls the API 10 times in a row -- without sleeping -- the calls should be block and a HTTP 400 error code should be returned. Let's call the API 10 times in a row by invoking the following loop in a bash-like shell.
+	A rate limit of 20 calls per minute will be translated to one every 3 seconds. So, if we define a loop that calls the API 10 times in a row -- without sleeping -- the majority of those calls should be rejected. Let's try this by opening a Bash-like shell. Type the following command:
 
 	```bash
 	for i in {3..13}; do curl -H 'x-ibm-client-id: <your_apikey>' -H 'accept: application/json' https://833f4b30.eu-gb.apiconnect.appdomain.cloud/api/ratio?number=$i; done;
 	```
 
-	Again, make sure the API endpoint URL matches yours. The first entry returns a proper ratio. The next so many calls are rejected and after 3 seconds one call is accepted again, followed by so many rejections again...
+	Again, make sure the API endpoint URL matches yours. The first entry returns a proper ratio. The next couple of calls are rejected and after 3 seconds one call is accepted again, followed by a bunch of rejections, and so on and so on.
 
 	```json
 	{"ratio": 2}
@@ -81,13 +81,14 @@ There are a number of ways you can configure your API. A common one would be rat
 	{"status":429,"message":"Error: Rate limit exceeded"}
 	```
 
-4. If we now introduce a 3 seconds pause after each API call, all 10 calls should be accepted and you should see the ratio converging to the golden ratio. The sleep of 3 seconds can be added as follows:
+4. If we now introduce a 3 seconds pause after each API call, we stick within the rate limit and all calls should be accepted. Let's try this by adding a three seconds pause to the command as follows. The sleep of 3 seconds can be added as follows:
 
 	```bash
 	for i in {3..13}; do curl -H 'x-ibm-client-id: <your_apikey>' -H 'accept: application/json' https://833f4b30.eu-gb.apiconnect.appdomain.cloud/api/ratio?number=$i; sleep 3; done;
 	```
 	
-	The output should be:
+	The output should be similar to:
+
 	```json
 	{
 	"ratio": 2
@@ -113,13 +114,15 @@ There are a number of ways you can configure your API. A common one would be rat
 	"ratio": 1.618055555555556
 	}
 	```
+	
+	Looking at the above output, you should see the ratio slowly converging to the golden ratio.
 
 ### Analytics and Logging
 We've called the API a couple of times now, so it's good to have a look at the **Analytics and Logging** section in the summary of the API. This shows the last hour of API activity and the last 25 responses to API calls.
 
 ![](images/api_analytics.png)
 
-To recall, the Cloud Functions Dashboard gives a similar overview, but then focussed on the serverless actions and sequences and not so much on the APIs.
+To recall, the Cloud Functions Dashboard gives a similar overview, but then focussed on the serverless actions and sequences, and not so much on the APIs.
 
 ![](images/monitor.png)
 
