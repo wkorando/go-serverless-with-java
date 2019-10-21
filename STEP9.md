@@ -44,7 +44,7 @@ There are a number of ways you can configure your API. A common one would be rat
 
 	Click 'Create API key' (2) under **Sharing Outside of Cloud Foundry organization** and provide a name for the key. Click 'Create' to complete the creation of the key.
 
-	![](images/cloud_api_key-1.png)
+	![](images/cloud_api_key-2.png)
 
 3. Next, we will be using `curl` and some basic `bash` scripting skills to demonstrate the working of rate limiting on our API. For this, first call the API once and check the result.
 	```bash
