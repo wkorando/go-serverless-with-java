@@ -32,7 +32,7 @@ So far we have been defining the behavior of the functions we have been deployin
 
 Currently the manifest.yml looks like this: 
 
-```
+```yaml
 packages:
   default:
     version: 1.0

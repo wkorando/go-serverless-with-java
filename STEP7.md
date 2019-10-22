@@ -14,11 +14,11 @@ These functions have been created via the CLI at the start of this lab. They hav
 
 	As you can see the result is similar to when the function is invoked via the command line. 
 
-2. Next, change the Input by clicking **Change input** and change the input to:
+2. Next, change the Input by clicking **Change Input** and change the input to:
 	
 	```json
 	{
-		"name": "your name here.."
+	   "name": "your name here.."
 	}
 	```
 	
@@ -26,7 +26,7 @@ These functions have been created via the CLI at the start of this lab. They hav
 	
 	```json
 	{
-		"greetings": "Hello your name here..."
+	   "greetings": "Hello your name here..."
 	}
 	```
 	
@@ -34,14 +34,17 @@ These functions have been created via the CLI at the start of this lab. They hav
 
 ### Create a new function via the Cloud Functions dashboard (OPTIONAL)
 
-If you want to explore what the possibilities are when creating cloud functions via the UI, click the **Create** button. In the next page, you can either create new triggers and/or sequences, but also new functions via quick templates or from scratch. Select the Quickstart templates to continue and choose Hello World. You should see a screen similar to 
+If you want to explore what the possibilities are when creating cloud functions via the UI, click the **Create** button. In the next page, you can either create new triggers and/or sequences, but also new functions via quick templates or from scratch. Select the **Quickstart Templates** to continue and choose Hello World. You should see a screen similar to 
 
 ![](./images/dashboard-3.png)
 
-Now select a favourite language using the dropdown (1). We've chosen for NodeJS 10 in the screenshot above. Click **Deploy** (2) to create the new function written in NodeJS. It outputs practically the same as our `helloJava` function. When no input is given, the function returns:
+Now select a favourite language using the dropdown (1). We've chosen for NodeJS 10 in the screenshot above. Click **Deploy** (2) to create the new function written in NodeJS. It outputs practically the same as our `helloJava` function. When no input is given, clicking **Invoke** returns:
 
 ```json
-"greeting": "Hello stranger!"
+{
+   "greeting": "Hello stranger!"
+}
+
 ```
 
 When there is input, the result is the same as for the `helloJava` function. Please see for yourself by invoking the `hello-world` function with some input as well. Next, let's add more value to our serverless functions by defining sequences.

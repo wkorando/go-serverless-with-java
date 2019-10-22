@@ -14,7 +14,7 @@ So far we have been just return JSON from our function, but functions are more f
 	```
 3. Copy in the body of the Java file:
 
-	```
+	```java
 	package com.example;
 
 	import com.google.gson.JsonObject;
