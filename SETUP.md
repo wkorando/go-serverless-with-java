@@ -13,7 +13,7 @@ You will need the following to complete this workshop:
 	```
 	brew install git
 	```
-
+	or a similar command for your Windows / Linux based machine.
 ## 0. Setup
 
 1. <a href="https://ibm.biz/BdzhjJ"  target="_blank">Create an IBM Cloud Account</a>

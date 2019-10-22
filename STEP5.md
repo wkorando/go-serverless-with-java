@@ -54,7 +54,7 @@ So far we have been just return JSON from our function, but functions are more f
 	```
 	cd ../../../../..
 	```
-6. Rebuild the Java .jar
+6. Rebuild the Java .jar:
 
 	```
 	./mvnw package
@@ -72,7 +72,7 @@ So far we have been just return JSON from our function, but functions are more f
 	ibmcloud fn action get webHello --url
 	```
 
-5. Invoke the url directly from the your web browser
+5. Invoke the above URL directly from the your web browser.
 
 6. Like earlier, you can change the `name` query parameter to change the value being returned.
 

@@ -27,7 +27,7 @@ Let's build and deploy our own Java serverless function.
 	```
 
 	`--result` means just show the results. Omit that, and see what you get back :)
-This also adds the `--blocking` flag, discussed below.
+This also adds the `--blocking` flag, discussed in the next section.
 
 <p  align="center">
 	<font size="4">
