@@ -3,7 +3,7 @@
 1. Run the following command to invoke a test function from the command-line:
 
    ```
-   ibmcloud wsk action invoke whisk.system/utils/echo -p message hello --result
+   ibmcloud fn action invoke whisk.system/utils/echo -p message hello --result
    ```
 
    You should get back a result that looks like this:

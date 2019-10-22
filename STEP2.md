@@ -10,12 +10,12 @@ Let's build and deploy our own Java serverless function.
 2. Deploy the function to IBM Cloud:
 
 	```
-	ibmcloud wsk action create helloJava target/hello-world-java.jar --main com.example.FunctionApp
+	ibmcloud fn action create helloJava target/hello-world-java.jar --main com.example.FunctionApp
 	```
 3. Execute the function:
 
 	```
-	ibmcloud wsk action invoke --result helloJava --param name World
+	ibmcloud fn action invoke --result helloJava --param name World
 	```
 
 	You should see:
