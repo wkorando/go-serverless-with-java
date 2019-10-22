@@ -11,7 +11,7 @@ Functions can be setup so they can be called directly over http as well. Let's t
 2. To find the url to execute the function run the following:
 
 	```
-	ibmcloud wsk action get helloJava --url
+	ibmcloud fn action get helloJava --url
 	```
 
 	This command will return with the url to call you function:
