@@ -1,8 +1,8 @@
 ## 8. Creating a Sequence
 
-Serverless functions should, by design, be small nearly atomic actions. This means that a single serverless function often provides limited value. Adding them to a sequence enables you to leverage the combined value of the individual functions. 
+Serverless functions should, by design, be small nearly atomic functions. This means that a single serverless function often provides limited value. Combining them into a so-called sequence enables you to leverage the combined value of the individual functions. 
 
-In this section we will set up such a sequence. A sequence allows us to pass the returned value from one function to another. The sequence that we will be creating, will consist of two functions. One that returns the _n_<sup>th</sup> Fibonnaci number and its immediate predecessor (where _n_ is the input value). The second one takes these two Fibonacci numbers as input and returns the calculated ratio of these numbers.
+In this section we will create such a sequence. A sequence allows us to pass the returned value from one function to another. The sequence that we will be creating, will consist of two functions. One that returns the _n_<sup>th</sup> Fibonnaci number and its immediate predecessor (where _n_ is the input value). The second one takes these two Fibonacci numbers as input and returns the calculated ratio of these numbers.
 
 ### The Good Old Fibonacci Numbers and its Sequence
 
@@ -20,9 +20,9 @@ So, what are those Fibonacci numbers again??
 
 For more information, please visit the [wiki](https://en.wikipedia.org/wiki/Fibonacci_number) page on this topic. 
 
-Now let's build a serverless action and a sequence to determine the _n_<sup>th</sup> Fibonacci number and to calculate the ratio of this number and its immediate predecessor in the Fibonacci sequence.
+Now let's build a serverless function and a sequence to determine the _n_<sup>th</sup> Fibonacci number and to calculate the ratio of this number and its immediate predecessor in the Fibonacci sequence.
 
-1. Our first action will return the _n_<sup>th</sup> Fibonacci number and its immediate predecessor. For this, go to your [toolchain](https://cloud.ibm.com/devops/toolchains) in IBM Cloud and open the Orion Web IDE. Then browse in the 'go-serverless-with-java' repo to the Java source code location (1) and right-click to create a new file (2). Name this file `FibonacciNumber.java`.
+1. Our first function will return the _n_<sup>th</sup> Fibonacci number and its immediate predecessor. For this, go to your [toolchain](https://cloud.ibm.com/devops/toolchains) in IBM Cloud and open the **Orion Web IDE**. Then browse in the **go-serverless-with-java** repo to the Java source code location (1) and right-click to create a new file (2). Name this file `FibonacciNumber.java`.
 
 	![](./images/create-action-webide.png)
 
@@ -134,7 +134,7 @@ Now let's build a serverless action and a sequence to determine the _n_<sup>th</
 
 	![](./images/update-manifest.png)
 
-5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package 'golden-ratio'. Make sure the 'golden-ratio' package has the same indentation as the 'default' package.
+5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package `golden-ratio`. Make sure the `golden-ratio` package has the same indentation as the `default` package.
 	```yaml
 	golden-ratio:
       actions:
@@ -151,7 +151,7 @@ Now let's build a serverless action and a sequence to determine the _n_<sup>th</
           runtime: java
           main: com.example.CalculateRatioWeb        
 	```
-	Note that we've also added the action `CalculateRatioWeb` that also calculates the ratio, but returns HTML instead of JSON.
+	Note that we've also added the function `CalculateRatioWeb` that also calculates the ratio, but returns HTML instead of JSON.
 
 6. The sequence is added in a similar way as the serverless that we added in the previous step. For this, look at the following piece of config:
 	```yaml
@@ -162,17 +162,17 @@ Now let's build a serverless action and a sequence to determine the _n_<sup>th</
         actions: fibonacciNumber, calculateRatioWeb
         web: true
 	```
-	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the 'actions' in the 'golden-ratio' package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` action. The output of the `fibonacciNumber` action is used to invoke the `calculateRatio` or the `calculateRatioWeb` action -- depending on which sequence you're looking into.
+	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the `actions` in the `golden-ratio` package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` function. The output of the `fibonacciNumber` function is used to invoke the `calculateRatio` or the `calculateRatioWeb` function -- depending on which sequence you're looking into.
 
-7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click 'Commit'.
+7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click **Commit**.
 
 	![](./images/git-commit-changes.png)
 
-8. Finally, click 'Sync' (1) to push the changes to the master branch. Next, click the 'Back to Toolchains' button (2) to return to the toolchain overview page. Select the 'Delivery Pipeline' tile to monitor the progress of your new build. The pipeline got triggered by the push of your changes to the master branch.
+8. Finally, click **Sync** (1) to push the changes to the master branch. Next, click the 'Back to Toolchains' button (2) to return to the toolchain overview page. Select the **Delivery Pipeline** tile to monitor the progress of your new build. The pipeline got triggered by the push of your changes to the master branch.
 
 	![](./images/git-sync-with-master.png)
 
-	Once the two stages in the pipeline successfully completed, go to the [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package 'golden-ratio' has been defined, showing 3 new actions and 2 new sequences. 
+	Once the two stages in the pipeline successfully completed, go to the [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package **golden-ratio** has been defined, showing 3 new functions and 2 new sequences. 
 
 	![](./images/cloud-functions.png)
 
