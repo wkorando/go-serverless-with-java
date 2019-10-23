@@ -132,7 +132,7 @@ The package we created earlier from `/whisk.system/cloudant` contains the `write
 	
 The action has two parameters, `dbname` and `doc`. The former will be the string value of the database we just created, the second will need to be in the form of a JSON message. We will need to make a few changes to the `golden-ratio` package so that we can start persisting data to `fibonaccidb`.
 
-**Tip:** We will be making several updates to `manifest.yml`, to see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
 
 1. We can set a default input value at the package level. This value will be automatically passed in everytime an action is invoked within that package. We will use this to pass in the `dbname` value for `write`. In `manifest.yml` you will want to add the following: 
 	
@@ -198,10 +198,25 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 		SOME TEXT
 	```
 	
-Here is an expanded view of what the complete `golden-ratio` package should look like:  
+Here is an expanded view of what the complete `manifest.yml` file should look like:  
 
-```
+```yaml
+# wskdeploy manifest file
+
 packages:
+  default:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      helloJava:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.FunctionApp
+      webHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.WebHello      
+        web-export: true
   golden-ratio:
     inputs:
       dbname: fibonaccidb
@@ -214,13 +229,28 @@ packages:
         function: hello-world-java.jar
         runtime: java
         main: com.example.CalculateRatio
+      calculateRatioWeb:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.CalculateRatioWeb
       cloudantDocBuilder:
         function: hello-world-java.jar
         runtime: java
-        main: com.example.BuildCloudantDoc 
+        main: com.example.BuildCloudantDoc  
     sequences:
       ratio:
-        actions: fibonacciNumber,calculateRatio,cloudantDocBuilder,/go-serverless-package/write
+        actions: fibonacciNumber, calculateRatio, cloudantDocBuilder, go-serverless-cloudant/write
+        web: true
+      ratioWeb:
+        actions: fibonacciNumber, calculateRatioWeb
+        web: true
+    apis:
+      ratioAPI: #Endpoint ID
+        api: #API Basepath
+          ratio: #Endpoint Path
+            ratio: #Function Reference
+              method: GET
+              response: json              ```
 ```
 
 <p  align="center">
