@@ -28,7 +28,7 @@ In this workshop we will look at how to write Serverless Functions in Java and r
 
 ### [10. Connecting to Database](STEP10.md)
 
-### [11. Creating a Trigger](STEP11.md)
+### [11. Creating a Rule](STEP11.md)
 
 <p  align="center">
 	<font size="4">

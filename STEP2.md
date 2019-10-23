@@ -1,4 +1,4 @@
-## 2. Building and Deploying a Serverless Function
+# 2. Building and Deploying a Serverless Function
 
 Let's build and deploy our own Java serverless function.
 
