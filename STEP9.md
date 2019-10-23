@@ -55,7 +55,7 @@ An API Gateway can be a great way to make your functions and sequences more acce
             web: true
           ratioWeb:
             actions: fibonacciNumber, calculateRatioWeb
-			web: true
+            web: true
         apis:
           ratioAPI: #Endpoint ID
             api: #API Basepath
