@@ -8,7 +8,7 @@
 
    You should get back a result that looks like this:
 
-   ```
+   ```json
    {
        "message": "hello"
    }

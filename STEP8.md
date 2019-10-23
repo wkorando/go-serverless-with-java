@@ -134,6 +134,8 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 	![](./images/update-manifest.png)
 
+	**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package `golden-ratio`. Make sure the `golden-ratio` package has the same indentation as the `default` package.
 	```yaml
 	golden-ratio:
@@ -154,6 +156,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 	Note that we've also added the function `CalculateRatioWeb` that also calculates the ratio, but returns HTML instead of JSON.
 
 6. The sequence is added in a similar way as the serverless that we added in the previous step. For this, look at the following piece of config:
+
 	```yaml
 	sequences:
       ratio:
@@ -162,7 +165,8 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
         actions: fibonacciNumber, calculateRatioWeb
         web: true
 	```
-	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the `actions` in the `golden-ratio` package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` function. The output of the `fibonacciNumber` function is used to invoke the `calculateRatio` or the `calculateRatioWeb` function -- depending on which sequence you're looking into.
+
+	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the `actions` in the `golden-ratio` package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` function. The output of the `fibonacciNumber` function is used to invoke the `calculateRatio` or the `calculateRatioWeb` function -- depending on which sequence you're looking into. 
 
 7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click **Commit**.
 
@@ -175,6 +179,48 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 	Once the two stages in the pipeline successfully completed, go to the [Cloud Functions](https://cloud.ibm.com/functions/actions) section in IBM Cloud to see the result of the deployment. A new package **golden-ratio** has been defined, showing 3 new functions and 2 new sequences. 
 
 	![](./images/cloud-functions.png)
+
+Here is an expanded view of what the complete `manifest.yml` file should look like:  
+
+```yaml
+# wskdeploy manifest file
+
+packages:
+  default:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      helloJava:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.FunctionApp
+      webHello:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.WebHello      
+        web-export: true
+  golden-ratio:
+    actions:
+      fibonacciNumber:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.FibonacciNumber
+      calculateRatio:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.CalculateRatio
+      calculateRatioWeb:
+        function: hello-world-java.jar
+        runtime: java
+        main: com.example.CalculateRatioWeb
+    sequences:
+      ratio:
+        actions: fibonacciNumber, calculateRatio
+        web: true
+      ratioWeb:
+        actions: fibonacciNumber, calculateRatioWeb
+        web: true
+```
 
 <p  align="center">
 	<font size="4">
