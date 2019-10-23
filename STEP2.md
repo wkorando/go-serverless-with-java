@@ -20,7 +20,7 @@ Let's build and deploy our own Java serverless function.
 
 	You should see:
 
-	```
+	```json
 	{
 	    "greetings": "Hello World"
 	}

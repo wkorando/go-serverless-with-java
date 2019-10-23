@@ -25,7 +25,7 @@ So far we have been executing functions synchronously with the `--result` tag. L
     ```
     You should get a response that looks something like this:
 
-    ```
+    ```json
 	{
 	    "greetings": "Hello World"
 	}
@@ -45,7 +45,7 @@ When invoking a function OpenWhisk is generating diagnostic information that can
 
 	You should get a response back that looks something like this:
 
-	```
+	```json
 	{
 	    "namespace": "[youremail]@mail.com_dev",
 	    "name": "helloJava",
