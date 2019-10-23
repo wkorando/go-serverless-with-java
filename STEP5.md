@@ -14,7 +14,7 @@ So far we have been just return JSON from our function, but functions are more f
 	```
 3. Copy in the body of the Java file:
 
-	```
+	```java
 	package com.example;
 
 	import com.google.gson.JsonObject;
@@ -54,7 +54,7 @@ So far we have been just return JSON from our function, but functions are more f
 	```
 	cd ../../../../..
 	```
-6. Rebuild the Java .jar
+6. Rebuild the Java .jar:
 
 	```
 	./mvnw package
@@ -63,7 +63,7 @@ So far we have been just return JSON from our function, but functions are more f
 7. Functions can be updated if you want to change their behavior. To our existing fuinction run the following command:
 
 	```
-	ibmcloud wsk action create webHello target/hello-world-java.jar --main com.example.WebHello --web true
+	ibmcloud fn action create webHello target/hello-world-java.jar --main com.example.WebHello --web true
 	```
 
 4. Get the url for the function with the following command like earlier:
@@ -72,7 +72,7 @@ So far we have been just return JSON from our function, but functions are more f
 	ibmcloud fn action get webHello --url
 	```
 
-5. Invoke the url directly from the your web browser
+5. Invoke the above URL directly from the your web browser.
 
 6. Like earlier, you can change the `name` query parameter to change the value being returned.
 
