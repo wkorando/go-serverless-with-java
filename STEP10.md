@@ -193,7 +193,7 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 
 	```json
 	{
-      "ok": true
+       "ok": true
 	}
 	```
 
@@ -205,6 +205,16 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	ibmcloud fn action invoke --result golden-ratio/ratio -p number 4
 	```
 
+	which returns a JSON message similar to
+
+	```json
+	{
+       "id": "03833e0253a495558a456c9c49f4367c",
+       "ok": true,
+       "rev": "1-681f2175bf5f993643f6d4e95a96a1e9"
+	}
+	```
+	
 	Take a note of the `id` in the return JSON message as we will need this document id in the next step.
 6. To read the newly stored value from the datanase, replace &lt;DOCID&gt; in the command below with the document id from the previous step and execute it.
 	
