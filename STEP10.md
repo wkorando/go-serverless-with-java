@@ -1,10 +1,10 @@
 ## 10. Connecting to a Database
 
-IBM Cloud has a catalog of services available to handle many of the most common needs of an enterprise. One of the most common requirements for organizations is the longterm persistence of business valuable information in a database. In this section we will walk through connecting to a Cloudant instance. Cloudant is a NoSql datastore, based on CouchDB.
+IBM Cloud has a catalog of services available to handle many of the most common needs of an enterprise. One of the most common requirements for organizations is the longterm persistence of business valuable information in a database. In this section we will walk through connecting to a Cloudant instance. Cloudant is a NoSQL datastore, based on CouchDB.
 
 ## Viewing Pre-Registered Packages
 
-1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services; messaging, IBM Watson, datastores. You can view these packages by running the following command:
+1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services like messaging, IBM Watson and datastores. You can view these packages by running the following command:
 	
 	```
 	ibmcloud fn package list /whisk.system
@@ -12,7 +12,7 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 
 	This command returns all the packages registered under the system package `/whisk.system`. In the output you should see: `/whisk.system/websocket`, `/whisk.system/messaging`, `/whisk.system/github`, etc.. 
 
-2. The package we are interested in is `/whisk.system/cloudant`. Pre-installed packages contain a actions, feeds, and other useful bits. You can get a condensed summary of everything within in a package with this command:
+2. The package we are interested in is `/whisk.system/cloudant`. Pre-installed packages contain actions, feeds, and other useful bits. You can get a condensed summary of everything within in a package with this command:
 
 	```
 	ibmcloud fn package get --summary /whisk.system/cloudant
@@ -47,11 +47,11 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 	---
 	**Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
 
-	---
-
 	```
 	ibmcloud fn package get /whisk.system/cloudant
 	```
+
+	---
 
 ## Binding to a Cloudant Instance
 
@@ -61,7 +61,7 @@ Let's create and bind a Cloudant instance to a package so we can start persistin
 
 First we must make a copy of the `/whisk.system/cloudant` package. This isn't strictly necessary for this workshop, but if we were to bind a Cloudant instance to `/whisk.system/cloudant`, then everyone in that space would be writing to the same Cloudant instance which might not be what you want! 
 
-1. To create a copy of a package run the following: 
+1. To create a copy of a package run the following command: 
 
 	```
 	ibmcloud fn package bind /whisk.system/cloudant go-serverless-cloudant
@@ -75,9 +75,9 @@ First we must make a copy of the `/whisk.system/cloudant` package. This isn't st
 
 ### Creating a Cloudant Service Instance
 
-Next we will want to create our Cloudant instance. This can be done through the IBM Cloud CLI.
+Next we need to create our Cloudant instance. This can be done through the IBM Cloud CLI.
 
-1. First, make sure you're linked to your default resource group by executing
+1. First, make sure you're linked to your default resource group by executing:
 
 	```
 	ibmcloud target -g Default
@@ -93,7 +93,7 @@ Next we will want to create our Cloudant instance. This can be done through the 
 
 	This will create a Cloudant instance with the name `cloudant-serverless`.
 
-1. Next, we need to create service credentials so we can connect to this datastore. To do that, run the following: 
+1. Next, we need to create service credentials so we can connect to this datastore. To do that, run the following command: 
 
 	```
 	ibmcloud resource service-key-create creds_cloudantserverless Manager --instance-name cloudant-serverless
@@ -108,21 +108,21 @@ With our Cloudant instance created, let's connect it with some of the functions 
 	
 ### Configuring a Package to Write to a Database
 	
-The package we created earlier from `/whisk.system/cloudant` contains the `write` action. It looks something like this:  
+The package, we created earlier from `/whisk.system/cloudant`, contains the `write` action. It looks something like this:  
 
 ```
  action go-serverless-cloudant/write: Write document in database
    (parameters: dbname, doc)
 ```
 	
-The action has two parameters, `dbname` and `doc`. The former will be the string value of the database that will be created later in this section. The second parameter will need to be in the form of a JSON message. We will need to make a few changes to the `golden-ratio` package so that we can start persisting data to the database.
+The action has two parameters, `dbname` and `doc`. The former will be the string value of the database, that will be created later in this section. The second parameter needs to be in the form of a JSON message. For this, we will make a few changes to the `golden-ratio` package, so that we can start persisting data to the database.
 
 ---
 **Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like, and where all the elements go, look at the end of this section.
 
 ---
 
-1. We can set a default input value at the package level. This value will be automatically passed in everytime an action is invoked within that package. We will use this to pass in the `dbname` value for `write`. In `manifest.yml` you will want to add the following: 
+1. We can set a default input value at the package level. This value will be automatically passed in everytime an action is invoked within that package. We will use this to pass in the `dbname` value for the `write` action. In the `manifest.yml` file, the following additions are needed:
 	
 		
 	```yaml
@@ -131,7 +131,7 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	      dbname: fibonaccidb
 	```
 
-	and after the `apis` section of the `golden-ratio` package:
+	and after the `apis` section of the `golden-ratio` package add:
 
 	```yaml
 	  go-serverless-cloudant:
@@ -139,9 +139,11 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	      dbname: fibonaccidb
 	```
 
-	So both the `golden-ratio` and the `go-serverless-cloudant` packages will have the default input parameter `dbname`.
+	Now both the `golden-ratio` and the `go-serverless-cloudant` packages will have the default input parameter `dbname`.
 	
-2. The action `calculateRatio` is currently returning the value `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want to our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. Go to the toolchain and open the **Orion Web IDE** to create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
+2. The action `calculateRatio` is currently returning the value of `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want to our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. 
+
+	For this, go to the toolchain and open the **Orion Web IDE** and create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
 
 	```java
 	package com.example;
@@ -159,9 +161,9 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	}
 	```
 
-	Note that we are also removing the value `dbname`. As mentioned above, default parameters are passed into every action invocation. We don't want to persist this value to our database, so we will remove it be fore building our response. 
+	Note that we are also removing the value `dbname`. As mentioned above, default parameters are passed into every action invocation. We don't want to persist this value to our database, so we remove it be fore building our response. 
 	
-3. Next, update the `manifest.yml` to declare this new action:
+3. Next, update the `manifest.yml` file to declare this new action:
 
 	```yaml
 	      cloudantDocBuilder:
@@ -177,9 +179,9 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	        actions: fibonacciNumber, calculateRatio, cloudantDocBuilder, go-serverless-cloudant/write
 	```
 
-5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the sequences section of this workshop if you're not sure anymore how to do this.
+5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the [Working with Sequences](STEP8.md) section of this workshop if you're not sure anymore how to do this.
 
-6. Once all stages in the pipeline successfully completed, we can bind the security credentials -- that we created at the start of this section -- to the `go-serverless-cloudant` package. For this, run the following command:
+6. Once all stages in the pipeline successfully completed, we can bind the security credentials, that we created at the start of this section, to the `go-serverless-cloudant` package. For this, run the following command:
 
 	```
 	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
