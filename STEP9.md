@@ -133,7 +133,7 @@ Now that you've learned how to define an API on top of your serverless actions a
 
 ## The Manifest YAML
 <details>
-<summary>Here is an expanded view of what the complete `manifest.yml` file should look like:</summary>  
+<summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>  
 
 ```yaml
 # wskdeploy manifest file

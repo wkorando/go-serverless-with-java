@@ -185,7 +185,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 ## The Manifest YAML
 <details>
-<summary>Here is an expanded view of what the complete `manifest.yml` file should look like:</summary>
+<summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>
 
 ```yaml
 # wskdeploy manifest file

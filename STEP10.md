@@ -242,7 +242,7 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 
 ## The Manifest YAML
 <details>
-<summary>Here is an expanded view of what the complete `manifest.yml` file should look like:</summary>
+<summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>
 
 ```yaml
 # wskdeploy manifest file
