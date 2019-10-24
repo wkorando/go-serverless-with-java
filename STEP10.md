@@ -189,10 +189,12 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	ibmcloud fn action invoke --result go-serverless-cloudant/create-database -p dbname "fibonaccidb"
 	```
 	
-	This command creates the database `fibonaccidb` and should return the following output:
+	This command creates the database `fibonaccidb` and should return output similar to:
 
 	```json
-
+	{
+      "ok": true
+	}
 	```
 
 ### Testing the updated Sequence
