@@ -283,8 +283,8 @@ packages:
         api: #API Basepath
           ratio: #Endpoint Path
             ratio: #Function Reference
-              method: GET
-			  response: json
+			  method: GET
+              response: json
   go-serverless-cloudant:
     inputs:
       dbname: fibonaccidb    
