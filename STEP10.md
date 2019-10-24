@@ -186,16 +186,20 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	ibmcloud fn action invoke --result golden-ratio/ratio -p number 4
 	```
 
-6. We can read the newly stored value with the following command:
+6. Finally, we can read the newly stored value with the following command. For this, copy the document id, i.e. the value of `id`, from the output of the `ratio` call that we executed in the previous step. Paste this value to <DOCID> in the command below 
 	
 	```
-	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb	
+	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb -p id <DOCID>
 	```
 	
-	You should be a reponse that looks similar to this:
+	You should see a reponse that looks similar to this:
 	
-	```
-		SOME TEXT
+	```json
+	{
+      "_id": "03833e0253a495558a456c9c49f4367c",
+      "_rev": "1-681f2175bf5f993643f6d4e95a96a1e9",
+      "ratio": 1.5
+    }
 	```
 	
 Here is an expanded view of what the complete `manifest.yml` file should look like:  
