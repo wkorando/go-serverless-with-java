@@ -1,4 +1,4 @@
-## 10. Connecting to Database
+## 10. Connecting to a Database
 
 IBM Cloud has a catalog of services available to handle many of the most common needs of an enterprise. One of the most common requirements for organizations is the longterm persistence of business valuable information in a database. In this section we will walk through connecting to a Cloudant instance. Cloudant is a NoSql datastore, based on CouchDB.
 
@@ -231,7 +231,9 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
       "ratio": 1.5
     }
 	```
-	
+
+## The Manifest YAML
+
 Here is an expanded view of what the complete `manifest.yml` file should look like:  
 
 ```yaml
