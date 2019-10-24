@@ -44,14 +44,14 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 
 	The `/whisk.system/cloudant` package contains many common database operations; `update-attachment`, `read-attachment`, `create-attachment`, and so on. A key concept within serverless is offloading work on to the platform. In this case, instead of adding logic to the functions we are writing to handle database behavior, we will instead use these pre-existing functions. 
 
-	---
-	**Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
+---
+**Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
 
-	```
-	ibmcloud fn package get /whisk.system/cloudant
-	```
+```
+ibmcloud fn package get /whisk.system/cloudant
+```
 
-	---
+---
 
 ## Binding to a Cloudant Instance
 
