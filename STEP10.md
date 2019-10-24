@@ -98,28 +98,10 @@ Next we will want to create our Cloudant instance. This can be done through the 
 
 	The key `creds_cloudantserverless` gives Manager rights to the service instance `cloudant-serverless`.
 
-1. Finally to bind the Cloudant instance to the package we just created, run the following command:
-
-	```
-	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
-	```
-
-	This will bind our newly created Cloudant instance to the package: `go-serverless-cloudant`. 
-
 
 ## Persisting to Cloudant
 
-With our Cloudant instance created let's connect it with some of the functions we have created in an earlier section to start persisting data. 
-
-### Creating a New Database
-
-1. First we will need to create a database in our cloudant instance where we will be persisting our data to. YOu can create a database with the following command: 
-
-	```
-	ibmcloud fn action invoke --result go-serverless-cloudant/create-database -p dbname "fibonaccidb"
-	```
-	
-	This command will create the database `fibonaccidb` which we will be using to store the results of the sequence we created in the section on sequences. 
+With our Cloudant instance created, let's connect it with some of the functions we have created in an earlier section to start persisting data. 
 	
 ### Configuring a Package to Write to a Database
 	
@@ -130,7 +112,7 @@ The package we created earlier from `/whisk.system/cloudant` contains the `write
    (parameters: dbname, doc)
 ```
 	
-The action has two parameters, `dbname` and `doc`. The former will be the string value of the database we just created, the second will need to be in the form of a JSON message. We will need to make a few changes to the `golden-ratio` package so that we can start persisting data to `fibonaccidb`.
+The action has two parameters, `dbname` and `doc`. The former will be the string value of the database that will be created later in this section. The second parameter will need to be in the form of a JSON message. We will need to make a few changes to the `golden-ratio` package so that we can start persisting data to the database.
 
 **Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
 
@@ -142,6 +124,17 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	    inputs:
 	      dbname: fibonaccidb
 	```
+
+	and after the `apis` section of the `golden-ratio` package:
+
+	```yaml
+	  go-serverless-cloudant:
+	    inputs:
+	      dbname: fibonaccidb
+	```
+
+	So both the `golden-ratio` and the `go-serverless-cloudant` packages will have the default input parameter `dbname`.
+	
 2. The action `calculateRatio` is currently returning the value `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want to our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. Go to the toolchain and open the **Orion Web IDE** to create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
 
 	```java
@@ -178,15 +171,40 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	        actions: fibonacciNumber, calculateRatio, cloudantDocBuilder, go-serverless-cloudant/write
 	```
 
-5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check Step 8 of this workshop if you're not sure anymore how to do this.
+5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the sequences section of this workshop if you're not sure anymore how to do this.
 
-5. Once all stages in the pipeline successfully completed, test the change by invoking the `ratio` sequence to persist a value to the database:
+6. Once all stages in the pipeline successfully completed, we can bind the security credentials -- that we created at the start of this section -- to the `go-serverless-cloudant` package. For this, run the following command:
+
+	```
+	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
+	```
+
+	This will bind our Cloudant instance with credentials `creds_cloudantserverless` to the package: `go-serverless-cloudant`. 
+
+### Creating a New Database
+
+1. Now that we've bound the package `go-serverless-cloudant` to our Cloudant instance, we can invoke the `create-database` action to create the database where we will be persisting our data to. For this, run the following command: 
+
+	```
+	ibmcloud fn action invoke --result go-serverless-cloudant/create-database -p dbname "fibonaccidb"
+	```
+	
+	This command creates the database `fibonaccidb` and should return the following output:
+
+	```json
+
+	```
+
+### Testing the updated Sequence
+
+5. Everything should now be in place to test the updated `ration` sequence. The sequence will persist the calculated ratio to the database. For this, run the following command:
 
 	```
 	ibmcloud fn action invoke --result golden-ratio/ratio -p number 4
 	```
 
-6. Finally, we can read the newly stored value with the following command. For this, copy the document id, i.e. the value of `id`, from the output of the `ratio` call that we executed in the previous step. Paste this value to <DOCID> in the command below 
+	Take a note of the `id` in the return JSON message as we will need this document id in the next step.
+6. To read the newly stored value from the datanase, replace &lt;DOCID&gt; in the command below with the document id from the previous step and execute it.
 	
 	```
 	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb -p id <DOCID>
@@ -254,7 +272,10 @@ packages:
           ratio: #Endpoint Path
             ratio: #Function Reference
               method: GET
-              response: json              ```
+			  response: json
+  go-serverless-cloudant:
+    inputs:
+      dbname: fibonaccidb    
 ```
 
 <p  align="center">
