@@ -283,7 +283,7 @@ packages:
         api: #API Basepath
           ratio: #Endpoint Path
             ratio: #Function Reference
-			  method: GET
+              method: GET
               response: json
   go-serverless-cloudant:
     inputs:
