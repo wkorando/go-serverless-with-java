@@ -2,18 +2,15 @@
 
 You will need the following to complete this workshop:
 
-1. Java 8+
-2. [IBM Cloud CLI](https://github.com/IBM-Cloud/ibm-cloud-cli-release/releases/)
-3. Install IBM Cloud Functions Plugin
+1. [Java 8+](https://adoptopenjdk.net/)
+2. [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+3. [IBM Cloud CLI](https://github.com/IBM-Cloud/ibm-cloud-cli-release/releases/)
+4. Install IBM Cloud Functions Plugin
 
 	```
 	ibmcloud plugin install cloud-functions
 	```
-4. git
-	```
-	brew install git
-	```
-	or a similar command for your Windows / Linux based machine.
+	
 ## 0. Setup
 
 1. <a href="https://ibm.biz/BdzhjJ"  target="_blank">Create an IBM Cloud Account</a>
