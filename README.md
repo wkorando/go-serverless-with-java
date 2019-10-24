@@ -22,11 +22,11 @@ In this workshop we will look at how to write Serverless Functions in Java and r
 
 ### [7. Viewing the Functions Dashboard](STEP7.md)
 
-### [8. Creating a Sequence](STEP8.md)
+### [8. Working with Sequences](STEP8.md)
 
 ### [9. Calling Functions Through the API Gateway](STEP9.md)
 
-### [10. Connecting to Database](STEP10.md)
+### [10. Connecting to a Database](STEP10.md)
 
 ### [11. Creating a Rule](STEP11.md)
 

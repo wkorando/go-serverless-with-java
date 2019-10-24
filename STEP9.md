@@ -17,8 +17,11 @@ An API Gateway can be a great way to make your functions and sequences more acce
 	```
 	
 	Make sure the `apis` section has the same indentation as the `actions` and `sequences` sections of the **manifest.yml**. Note in the above configuration the different entries for labeling the API, for defining its base path, endpoint path, function / sequence to invoke, etc. 
-	
-	**Tip:** For an expanded view of what the `manifest.yml` file should look like and where all the elements go, look at the end of this section.
+
+---	
+**Tip:** For an expanded view of what the `manifest.yml` file should look like, and where all the elements go, look at the end of this section.
+
+---
 	 
 2. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the previous section of this workshop if you're not sure anymore how to do this.
 
@@ -128,7 +131,9 @@ To recall, the Cloud Functions Dashboard gives a similar overview, but then focu
 
 Now that you've learned how to define an API on top of your serverless actions and sequences -- and how to set security and rate limiting on this API -- it is time to see how you can combine serverless actions with e.g. a NoSQL database.
 
-Here is an expanded view of what the complete `manifest.yml` file should look like:  
+## The Manifest YAML
+<details>
+<summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>  
 
 ```yaml
 # wskdeploy manifest file
@@ -176,6 +181,8 @@ packages:
               method: GET
               response: json              ```
 ```
+
+</details>
 
 <p  align="center">
 	<font size="4">

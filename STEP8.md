@@ -1,4 +1,4 @@
-## 8. Creating a Sequence
+## 8. Working with Sequences
 
 Serverless functions should, by design, be small nearly atomic functions. This means that a single serverless function often provides limited value. Combining them into a so-called sequence enables you to leverage the combined value of the individual functions. 
 
@@ -134,7 +134,10 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 	![](./images/update-manifest.png)
 
-	**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+---
+**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like, and where all the elements go, look at the end of this section.
+
+---
 
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package `golden-ratio`. Make sure the `golden-ratio` package has the same indentation as the `default` package.
 	```yaml
@@ -180,7 +183,9 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 	![](./images/cloud-functions.png)
 
-Here is an expanded view of what the complete `manifest.yml` file should look like:  
+## The Manifest YAML
+<details>
+<summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>
 
 ```yaml
 # wskdeploy manifest file
@@ -221,6 +226,8 @@ packages:
         actions: fibonacciNumber, calculateRatioWeb
         web: true
 ```
+
+</details>
 
 <p  align="center">
 	<font size="4">

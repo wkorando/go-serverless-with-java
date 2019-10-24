@@ -1,10 +1,10 @@
-## 10. Connecting to Database
+## 10. Connecting to a Database
 
-IBM Cloud has a catalog of services available to handle many of the most common needs of an enterprise. One of the most common requirements for organizations is the longterm persistence of business valuable information in a database. In this section we will walk through connecting to a Cloudant instance. Cloudant is a NoSql datastore, based on CouchDB.
+IBM Cloud has a catalog of services available to handle many of the most common needs of an enterprise. One of the most common requirements for organizations is the longterm persistence of business valuable information in a database. In this section we will walk through connecting to a Cloudant instance. Cloudant is a NoSQL datastore, based on CouchDB.
 
 ## Viewing Pre-Registered Packages
 
-1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services; messaging, IBM Watson, datastores. You can view these packages by running the following command:
+1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services like messaging, IBM Watson and datastores. You can view these packages by running the following command:
 	
 	```
 	ibmcloud fn package list /whisk.system
@@ -12,7 +12,7 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 
 	This command returns all the packages registered under the system package `/whisk.system`. In the output you should see: `/whisk.system/websocket`, `/whisk.system/messaging`, `/whisk.system/github`, etc.. 
 
-2. The package we are interested in is `/whisk.system/cloudant`. Pre-installed packages contain a actions, feeds, and other useful bits. You can get a condensed summary of everything within in a package with this command:
+2. The package we are interested in is `/whisk.system/cloudant`. Pre-installed packages contain actions, feeds, and other useful bits. You can get a condensed summary of everything within in a package with this command:
 
 	```
 	ibmcloud fn package get --summary /whisk.system/cloudant
@@ -44,11 +44,14 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 
 	The `/whisk.system/cloudant` package contains many common database operations; `update-attachment`, `read-attachment`, `create-attachment`, and so on. A key concept within serverless is offloading work on to the platform. In this case, instead of adding logic to the functions we are writing to handle database behavior, we will instead use these pre-existing functions. 
 
+---
 **Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
 
 ```
 ibmcloud fn package get /whisk.system/cloudant
 ```
+
+---
 
 ## Binding to a Cloudant Instance
 
@@ -58,7 +61,7 @@ Let's create and bind a Cloudant instance to a package so we can start persistin
 
 First we must make a copy of the `/whisk.system/cloudant` package. This isn't strictly necessary for this workshop, but if we were to bind a Cloudant instance to `/whisk.system/cloudant`, then everyone in that space would be writing to the same Cloudant instance which might not be what you want! 
 
-1. To create a copy of a package run the following: 
+1. To create a copy of a package run the following command: 
 
 	```
 	ibmcloud fn package bind /whisk.system/cloudant go-serverless-cloudant
@@ -72,9 +75,9 @@ First we must make a copy of the `/whisk.system/cloudant` package. This isn't st
 
 ### Creating a Cloudant Service Instance
 
-Next we will want to create our Cloudant instance. This can be done through the IBM Cloud CLI.
+Next we need to create our Cloudant instance. This can be done through the IBM Cloud CLI.
 
-1. First, make sure you're linked to your default resource group by executing
+1. First, make sure you're linked to your default resource group by executing:
 
 	```
 	ibmcloud target -g Default
@@ -90,7 +93,7 @@ Next we will want to create our Cloudant instance. This can be done through the 
 
 	This will create a Cloudant instance with the name `cloudant-serverless`.
 
-1. Next, we need to create service credentials so we can connect to this datastore. To do that, run the following: 
+1. Next, we need to create service credentials so we can connect to this datastore. To do that, run the following command: 
 
 	```
 	ibmcloud resource service-key-create creds_cloudantserverless Manager --instance-name cloudant-serverless
@@ -98,43 +101,28 @@ Next we will want to create our Cloudant instance. This can be done through the 
 
 	The key `creds_cloudantserverless` gives Manager rights to the service instance `cloudant-serverless`.
 
-1. Finally to bind the Cloudant instance to the package we just created, run the following command:
-
-	```
-	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
-	```
-
-	This will bind our newly created Cloudant instance to the package: `go-serverless-cloudant`. 
-
 
 ## Persisting to Cloudant
 
-With our Cloudant instance created let's connect it with some of the functions we have created in an earlier section to start persisting data. 
-
-### Creating a New Database
-
-1. First we will need to create a database in our cloudant instance where we will be persisting our data to. YOu can create a database with the following command: 
-
-	```
-	ibmcloud fn action invoke --result go-serverless-cloudant/create-database -p dbname "fibonaccidb"
-	```
-	
-	This command will create the database `fibonaccidb` which we will be using to store the results of the sequence we created in the section on sequences. 
+With our Cloudant instance created, let's connect it with some of the functions we have created in an earlier section to start persisting data. 
 	
 ### Configuring a Package to Write to a Database
 	
-The package we created earlier from `/whisk.system/cloudant` contains the `write` action. It looks something like this:  
+The package, we created earlier from `/whisk.system/cloudant`, contains the `write` action. It looks something like this:  
 
 ```
  action go-serverless-cloudant/write: Write document in database
    (parameters: dbname, doc)
 ```
 	
-The action has two parameters, `dbname` and `doc`. The former will be the string value of the database we just created, the second will need to be in the form of a JSON message. We will need to make a few changes to the `golden-ratio` package so that we can start persisting data to `fibonaccidb`.
+The action has two parameters, `dbname` and `doc`. The former will be the string value of the database, that will be created later in this section. The second parameter needs to be in the form of a JSON message. For this, we will make a few changes to the `golden-ratio` package, so that we can start persisting data to the database.
 
-**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+---
+**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like, and where all the elements go, look at the end of this section.
 
-1. We can set a default input value at the package level. This value will be automatically passed in everytime an action is invoked within that package. We will use this to pass in the `dbname` value for `write`. In `manifest.yml` you will want to add the following: 
+---
+
+1. We can set a default input value at the package level. This value will be automatically passed in everytime an action is invoked within that package. We will use this to pass in the `dbname` value for the `write` action. In the `manifest.yml` file, the following additions are needed:
 	
 		
 	```yaml
@@ -142,7 +130,20 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	    inputs:
 	      dbname: fibonaccidb
 	```
-2. The action `calculateRatio` is currently returning the value `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want to our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. Go to the toolchain and open the **Orion Web IDE** to create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
+
+	and after the `apis` section of the `golden-ratio` package add:
+
+	```yaml
+	  go-serverless-cloudant:
+	    inputs:
+	      dbname: fibonaccidb
+	```
+
+	Now both the `golden-ratio` and the `go-serverless-cloudant` packages will have the default input parameter `dbname`.
+	
+2. The action `calculateRatio` is currently returning the value of `ratio`. To store this in Cloudant we will need to wrap this in an object call `doc`. This could be done directly in `calculateRatio`, but we want to our functions to be atomic in their behavior. So instead let's create a new function called `buildCloudantDoc`. 
+
+	For this, go to the toolchain and open the **Orion Web IDE** and create a new Java file called `BuildCloudantDoc.java`. Copy the following code into it: 
 
 	```java
 	package com.example;
@@ -160,9 +161,9 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	}
 	```
 
-	Note that we are also removing the value `dbname`. As mentioned above, default parameters are passed into every action invocation. We don't want to persist this value to our database, so we will remove it be fore building our response. 
+	Note that we are also removing the value `dbname`. As mentioned above, default parameters are passed into every action invocation. We don't want to persist this value to our database, so we remove it be fore building our response. 
 	
-3. Next, update the `manifest.yml` to declare this new action:
+3. Next, update the `manifest.yml` file to declare this new action:
 
 	```yaml
 	      cloudantDocBuilder:
@@ -178,27 +179,70 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	        actions: fibonacciNumber, calculateRatio, cloudantDocBuilder, go-serverless-cloudant/write
 	```
 
-5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check Step 8 of this workshop if you're not sure anymore how to do this.
+5. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the [Working with Sequences](STEP8.md) section of this workshop if you're not sure anymore how to do this.
 
-5. Once all stages in the pipeline successfully completed, test the change by invoking the `ratio` sequence to persist a value to the database:
+6. Once all stages in the pipeline successfully completed, we can bind the security credentials, that we created at the start of this section, to the `go-serverless-cloudant` package. For this, run the following command:
+
+	```
+	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
+	```
+
+	This will bind our Cloudant instance with credentials `creds_cloudantserverless` to the package: `go-serverless-cloudant`. 
+
+### Creating a New Database
+
+1. Now that we've bound the package `go-serverless-cloudant` to our Cloudant instance, we can invoke the `create-database` action to create the database where we will be persisting our data to. For this, run the following command: 
+
+	```
+	ibmcloud fn action invoke --result go-serverless-cloudant/create-database -p dbname "fibonaccidb"
+	```
+	
+	This command creates the database `fibonaccidb` and should return output similar to:
+
+	```json
+	{
+       "ok": true
+	}
+	```
+
+### Testing the updated Sequence
+
+5. Everything should now be in place to test the updated `ration` sequence. The sequence will persist the calculated ratio to the database. For this, run the following command:
 
 	```
 	ibmcloud fn action invoke --result golden-ratio/ratio -p number 4
 	```
 
-6. We can read the newly stored value with the following command:
-	
-	```
-	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb	
-	```
-	
-	You should be a reponse that looks similar to this:
-	
-	```
-		SOME TEXT
+	which returns a JSON message similar to
+
+	```json
+	{
+       "id": "03833e0253a495558a456c9c49f4367c",
+       "ok": true,
+       "rev": "1-681f2175bf5f993643f6d4e95a96a1e9"
+	}
 	```
 	
-Here is an expanded view of what the complete `manifest.yml` file should look like:  
+	Take a note of the `id` in the return JSON message as we will need this document id in the next step.
+6. To read the newly stored value from the datanase, replace `DOCID` in the command below with the document id from the previous step and execute it.
+	
+	```
+	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb -p id DOCID
+	```
+	
+	You should see a reponse that looks similar to this:
+	
+	```json
+	{
+      "_id": "03833e0253a495558a456c9c49f4367c",
+      "_rev": "1-681f2175bf5f993643f6d4e95a96a1e9",
+      "ratio": 1.5
+    }
+	```
+
+## The Manifest YAML
+<details>
+<summary>Here is an expanded view of what the complete <code>manifest.yml</code> file should look like:</summary>
 
 ```yaml
 # wskdeploy manifest file
@@ -250,8 +294,13 @@ packages:
           ratio: #Endpoint Path
             ratio: #Function Reference
               method: GET
-              response: json              ```
+              response: json
+  go-serverless-cloudant:
+    inputs:
+      dbname: fibonaccidb    
 ```
+
+</details>
 
 <p  align="center">
 	<font size="4">
