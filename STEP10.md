@@ -224,10 +224,10 @@ The action has two parameters, `dbname` and `doc`. The former will be the string
 	```
 	
 	Take a note of the `id` in the return JSON message as we will need this document id in the next step.
-6. To read the newly stored value from the datanase, replace &lt;DOCID&gt; in the command below with the document id from the previous step and execute it.
+6. To read the newly stored value from the datanase, replace `DOCID` in the command below with the document id from the previous step and execute it.
 	
 	```
-	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb -p id <DOCID>
+	ibmcloud fn action invoke --result  go-serverless-cloudant/read -p dbname fibonaccidb -p id DOCID
 	```
 	
 	You should see a reponse that looks similar to this:
