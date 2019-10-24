@@ -134,7 +134,10 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 	![](./images/update-manifest.png)
 
-	**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+---
+**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+
+---
 
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package `golden-ratio`. Make sure the `golden-ratio` package has the same indentation as the `default` package.
 	```yaml
