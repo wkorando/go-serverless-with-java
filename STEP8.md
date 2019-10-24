@@ -1,4 +1,4 @@
-## 8. Creating a Sequence
+## 8. Working with Sequences
 
 Serverless functions should, by design, be small nearly atomic functions. This means that a single serverless function often provides limited value. Combining them into a so-called sequence enables you to leverage the combined value of the individual functions. 
 
