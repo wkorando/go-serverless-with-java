@@ -1,6 +1,6 @@
 ## 5. Using Functions to Return HTML
 
-So far we have been just return JSON from our function, but functions are more flexible than that! Let's setup a function to return HTML:
+So far we have been just returning JSON from our function, but functions are more flexible than that! Let's setup a function to return HTML:
 
 1. Change the current directory we are in to the root package of our Java app:
 
@@ -63,7 +63,7 @@ So far we have been just return JSON from our function, but functions are more f
 7. Functions can be updated if you want to change their behavior. To our existing fuinction run the following command:
 
 	```
-	ibmcloud fn action create webHello target/hello-world-java.jar --main com.example.WebHello --web true
+	ibmcloud fn action update webHello target/hello-world-java.jar --main com.example.WebHello --web true
 	```
 
 4. Get the url for the function with the following command like earlier:

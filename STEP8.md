@@ -1,6 +1,6 @@
 ## 8. Working with Sequences
 
-Serverless functions should, by design, be small nearly atomic functions. This means that a single serverless function often provides limited value. Combining them into a so-called sequence enables you to leverage the combined value of the individual functions. 
+Serverless functions should, by design, be small nearly atomic functions. This means that a single serverless function often provides limited value. Functions can be chained into sequences enabling you to leverage the combined value of several functions. 
 
 In this section we will create such a sequence. A sequence allows us to pass the returned value from one function to another. The sequence that we will be creating, will consist of two functions. One that returns the _n_<sup>th</sup> Fibonnaci number and its immediate predecessor (where _n_ is the input value). The second one takes these two Fibonacci numbers as input and returns the calculated ratio of these numbers.
 
@@ -140,6 +140,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 ---
 
 5. Next, add the following definitions to manifest YAML. Note that all these definitions are added in a seperate package `golden-ratio`. Make sure the `golden-ratio` package has the same indentation as the `default` package.
+
 	```yaml
 	golden-ratio:
       actions:
@@ -158,7 +159,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 	```
 	Note that we've also added the function `CalculateRatioWeb` that also calculates the ratio, but returns HTML instead of JSON.
 
-6. The sequence is added in a similar way as the serverless that we added in the previous step. For this, look at the following piece of config:
+6. The sequence is added in a similar way as the functions that we added in the previous step. For this, look at the following piece of config:
 
 	```yaml
 	sequences:
@@ -169,7 +170,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
         web: true
 	```
 
-	Add this to the `manifest.yml` file in the Web IDE. The 'sequences' entry should have the same indentation as the `actions` in the `golden-ratio` package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They both first invoke the `fibonacciNumber` function. The output of the `fibonacciNumber` function is used to invoke the `calculateRatio` or the `calculateRatioWeb` function -- depending on which sequence you're looking into. 
+	Add this to the `manifest.yml` file in the Web IDE. The `sequences` entry should have the same indentation as the `actions` in the `golden-ratio` package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They should both first invoke the `fibonacciNumber` function. The output of the `fibonacciNumber` function is used to invoke the `calculateRatio` or the `calculateRatioWeb` function -- depending on which sequence you're looking into. 
 
 7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click **Commit**.
 

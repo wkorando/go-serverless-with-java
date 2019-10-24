@@ -47,10 +47,10 @@ When invoking a function OpenWhisk is generating diagnostic information that can
 
 	```json
 	{
-	    "namespace": "[youremail]@mail.com_dev",
+	    "namespace": "[YOUR_ACCOUNT_NAME]_dev",
 	    "name": "helloJava",
 	    "version": "0.0.1",
-	    "subject": "[youremail]@mail.com",
+	    "subject": "[YOUR_ACCOUNT_NAME]",
 	    "activationId": "c51e11cf3bad42a39e11cf3badb2a3a3",
 	    "start": 1568061913141,
 	    "end": 1568061913482,

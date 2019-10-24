@@ -1,12 +1,12 @@
 ## 6. Building a Deployment Pipeline
 
-So far we are deploying functions directly from our local computer. This process of building and deploying functions won't work within an organization. Let's set up a so-called toolchain, that will clone this repo to a private GitLab repo and sets up a delivery pipeline with two stages. One that builds the java code and the second one that deploys the serverless functions to the cloud.
+So far we are deploying functions directly from our local computer. This process of building and deploying functions won't scale though to enterprise level. Let's set up a so-called toolchain, that will clone this repo to a private GitLab repo and sets up a delivery pipeline with two stages. One that builds the Java code and the second one that deploys the serverless functions to the cloud.
 
 1. To create the toolchain, CTRL-click the following button:
 	
     [![Deploy to IBM Cloud](./images/button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/eciggaar/go-serverless-with-java&branch=master&env_id=ibm:yp:us-south)
 
-2. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Dallas will be the default region when your closer to the US. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
+2. For the Lite account users, make sure the region (1) is set to your default region. For Europe based users this most likely will be London. Dallas will be the default region when you're closer to the US. Check with your workshop hosts if you're not sure. Next, click (2) to configure the Delivery Pipeline.
 
 	![](./images/pipeline-1.png)
 
@@ -28,9 +28,9 @@ If you want, you can click the build or deploy stage to further look into the de
 
 ### manifest.yml
 
-So far we have been defining the behavior of the functions we have been deploying through the IBM Cloud CLI. This isn't ideal as changes could be forgotten or lost. Instead of using the CLI to define this behavior, we will using the [manifest.yml](mainfest.yml). This allows us to keep the configuration of our functions in the same location as the code. This is a concept called [configuration-as-code](https://rollout.io/blog/configuration-as-code-everything-need-know/).
+So far we have been defining the behavior of the functions we have been deploying through the IBM Cloud CLI. This isn't ideal as changes could be forgotten or lost. Instead of using the CLI to define this behavior, we be will using the [manifest.yml](mainfest.yml). This allows us to keep the configuration of our functions in the same location as the code. This is a concept called [configuration-as-code](https://rollout.io/blog/configuration-as-code-everything-need-know/).
 
-Currently the manifest.yml looks like this: 
+Currently the manifest.yml 	looks like this: 
 
 ```yaml
 packages:
@@ -49,7 +49,7 @@ packages:
         web-export: true
 ``` 
 
-In the above yaml `helloJava` & `webHello` are defining the names of our functions, the fields under them are defining the type of function, where the function is located, the main class, and if the function should be web enabled (default is false). We will continue to work with the manifest.yml going forward in the workshop, but you can read more about it [here](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-deploy).
+In the above yaml `helloJava` & `webHello` are defining the names of our functions, the fields under them are define the type of function, where the function is located, the main class, and if the function should be web enabled (default is false). We will continue to work with the manifest.yml going forward in the workshop, but you can read more about it [here](https://cloud.ibm.com/docs/openwhisk?topic=cloud-functions-deploy).
 
 <p  align="center">
 	<font size="4">

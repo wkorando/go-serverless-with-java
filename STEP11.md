@@ -3,9 +3,16 @@
 
 OpenWhisk supports the creation of rules. Rules are the combination of a trigger and an action to invoke when that trigger condition is met. When utilizing a serverless architecture organizations will often make use of rules to handle the execution of actions, rather than executing them manually. The triggering event might be the time of day, a message published to a topic, or in the case of this secion, when a record is written to a database. 
 
+---
+THIS STEP IS CURRENTLY UNDER CONSTRUCTION CHECK BACK LATER
+
+---
+
+
+
 ## Defining a Trigger
 
-1. 
+1. Feed
 
 	```
 	 feed   /whisk.system/cloudant/changes: Database change feed

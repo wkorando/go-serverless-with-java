@@ -18,10 +18,10 @@ An API Gateway can be a great way to make your functions and sequences more acce
 	
 	Make sure the `apis` section has the same indentation as the `actions` and `sequences` sections of the **manifest.yml**. Note in the above configuration the different entries for labeling the API, for defining its base path, endpoint path, function / sequence to invoke, etc. 
 
----	
-**Tip:** For an expanded view of what the `manifest.yml` file should look like, and where all the elements go, look at the end of this section.
-
----
+	---	
+	**Tip:** For an expanded view of what the `manifest.yml` file should look like, and where all the elements go, look at the end of this section.
+	
+	---
 	 
 2. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the previous section of this workshop if you're not sure anymore how to do this.
 
