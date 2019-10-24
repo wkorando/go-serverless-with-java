@@ -135,7 +135,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 	![](./images/update-manifest.png)
 
 ---
-**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like, and where all the elements go, look at the end of this section.
 
 ---
 

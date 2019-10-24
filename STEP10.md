@@ -44,11 +44,14 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 
 	The `/whisk.system/cloudant` package contains many common database operations; `update-attachment`, `read-attachment`, `create-attachment`, and so on. A key concept within serverless is offloading work on to the platform. In this case, instead of adding logic to the functions we are writing to handle database behavior, we will instead use these pre-existing functions. 
 
-**Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
+	---
+	**Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
 
-```
-ibmcloud fn package get /whisk.system/cloudant
-```
+	---
+
+	```
+	ibmcloud fn package get /whisk.system/cloudant
+	```
 
 ## Binding to a Cloudant Instance
 
@@ -114,7 +117,10 @@ The package we created earlier from `/whisk.system/cloudant` contains the `write
 	
 The action has two parameters, `dbname` and `doc`. The former will be the string value of the database that will be created later in this section. The second parameter will need to be in the form of a JSON message. We will need to make a few changes to the `golden-ratio` package so that we can start persisting data to the database.
 
-**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like and where all the elements go, look at the end of this section.
+---
+**Tip:** We will be making several updates to `manifest.yml`. To see an expanded view of what the file should look like, and where all the elements go, look at the end of this section.
+
+---
 
 1. We can set a default input value at the package level. This value will be automatically passed in everytime an action is invoked within that package. We will use this to pass in the `dbname` value for `write`. In `manifest.yml` you will want to add the following: 
 	
