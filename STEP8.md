@@ -180,6 +180,8 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 	![](./images/cloud-functions.png)
 
+## The Manifest YAML
+
 Here is an expanded view of what the complete `manifest.yml` file should look like:  
 
 ```yaml

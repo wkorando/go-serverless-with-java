@@ -128,6 +128,8 @@ To recall, the Cloud Functions Dashboard gives a similar overview, but then focu
 
 Now that you've learned how to define an API on top of your serverless actions and sequences -- and how to set security and rate limiting on this API -- it is time to see how you can combine serverless actions with e.g. a NoSQL database.
 
+## The Manifest YAML
+
 Here is an expanded view of what the complete `manifest.yml` file should look like:  
 
 ```yaml
