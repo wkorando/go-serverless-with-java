@@ -46,8 +46,8 @@ These are issues commonly encountered when running this lab:
 
 <details>
   <summary>User has an Expired IBM Account</summary>
-  If a user has an expired/lapsed IBM account it can be reactivated using a promo code. To 
-<details>
+  If a user has an expired/lapsed IBM account it can be reactivated using a promo code. 
+</details>
 
 
 ### Blank Region When Invoking Actions
@@ -56,7 +56,7 @@ These are issues commonly encountered when running this lab:
   <summary>User attempts to invoke action, but gets response saying region is blank</summary>
   Sometimes an user, even if they run `target --cf` and select a region, will still run into issues when attempting to invoke actions. Steps to resolve:
   1. Run: `ibmcloud target -r REGION` see above for region list 
-<details>
+</details>
 
 ### Creating Build Pipeline Problems
 
@@ -65,7 +65,7 @@ These are issues commonly encountered when running this lab:
  	A user with multiple organizations might run into this issue. Steps to resolve are as follows:
  	1. In the command like run `ibmcloud account spaces` in the output it should include the org they are using within Cloud Foundry
  	2. Make sure that same Organization is being used in the API creation Org field
-<details>
+</details>
 
 
 ## Authors
