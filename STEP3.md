@@ -1,6 +1,6 @@
 ## 3. Getting Familiar with OpenWhisk Commands
 
-Let's take a deeper look at some of the common commands you will be using when running functions on OpenWhisk.
+Let's take a deeper look at some of the common commands you will be using when building, running, and debugging functions on OpenWhisk.
 
 ### Executing Functions Asynchronously
 
@@ -17,11 +17,13 @@ So far we have been executing functions synchronously with the `--result` tag. L
     ```
     ok: invoked /_/helloJava with id c51e11cf3bad42a39e11cf3badb2a3a3
     ```
+    
+    Take note of the returned value for `id` you will use it in place of `RETURNED_ID` with many of the commands we will be running later in this section. 
 
 2. Use the below command to retrieve the result of the function invocation:
 
     ```
-    ibmcloud fn activation result [id]
+    ibmcloud fn activation result RETURNED_ID
     ```
     You should get a response that looks something like this:
 
@@ -31,11 +33,11 @@ So far we have been executing functions synchronously with the `--result` tag. L
 	}
 	```
 
-	**Note:** Functions execute in asynchronous mode by default, you can also use the tag `--blocking` explicitly invoke a function in asynchronous mode.
+	**Note:** Functions execute in asynchronous mode by default, you can also use the tag `--blocking` to explicitly invoke a function in asynchronous mode.
 
 ### Viewing Function Invocation Information
 
-When invoking a function OpenWhisk is generating diagnostic information that can be used for tracking system usage, debugging, and other purposes.
+When invoking a function OpenWhisk is generating diagnostic information that can be used for monitoring usage, debugging, and other purposes.
 
 1. You can view the invocation information of the function we executed earlier with this command:
 
@@ -47,10 +49,10 @@ When invoking a function OpenWhisk is generating diagnostic information that can
 
 	```json
 	{
-	    "namespace": "[YOUR_ACCOUNT_NAME]_dev",
+	    "namespace": "YOUR_ACCOUNT_NAME_dev",
 	    "name": "helloJava",
 	    "version": "0.0.1",
-	    "subject": "[YOUR_ACCOUNT_NAME]",
+	    "subject": "YOUR_ACCOUNT_NAME",
 	    "activationId": "c51e11cf3bad42a39e11cf3badb2a3a3",
 	    "start": 1568061913141,
 	    "end": 1568061913482,
@@ -70,7 +72,7 @@ When invoking a function OpenWhisk is generating diagnostic information that can
 	    "annotations": [
 	        {
 	            "key": "path",
-	            "value": "[youremail]@mail.com_dev/helloJava"
+	            "value": "YOUR_ACCOUNT_NAME_dev/helloJava"
 	        },
 	        {
 	            "key": "waitTime",
@@ -110,7 +112,7 @@ When invoking a function OpenWhisk is generating diagnostic information that can
 1. To view the logs from an invocation run the following:
 
 	```
-	ibmcloud fn activation logs [id]
+	ibmcloud fn activation logs RETURNED_ID
 	```
 	You should get a return thaty looks like this:
 
@@ -121,7 +123,7 @@ When invoking a function OpenWhisk is generating diagnostic information that can
 2. For longer running functions, you can tail the logs a function is producing with the following command:
 
 	```
-	ibmcloud fn activation poll [id]
+	ibmcloud fn activation poll RETURNED_ID
 	```
 
 ### Retrieve Most Recent Function Execution

@@ -11,7 +11,7 @@ You will need the following to complete this workshop:
 1. [Java 8+](https://adoptopenjdk.net/)
 2. [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 3. [IBM Cloud CLI](https://github.com/IBM-Cloud/ibm-cloud-cli-release/releases/)
-4. Install IBM Cloud Functions Plugin
+4. Install the IBM Cloud Functions Plugin by running this command in your terminal window:
 
 	```
 	ibmcloud plugin install cloud-functions
