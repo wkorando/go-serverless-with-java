@@ -30,7 +30,7 @@ If you want, you can click the build or deploy stage to further look into the de
 
 So far we have been defining the behavior of the functions we have been deploying through the IBM Cloud CLI. This isn't ideal as changes could be forgotten or lost. Instead of using the CLI to define this behavior, we be will using the [manifest.yml](mainfest.yml). This allows us to keep the configuration of our functions in the same location as the code. This is a concept called [configuration-as-code](https://rollout.io/blog/configuration-as-code-everything-need-know/).
 
-Currently the manifest.yml 	looks like this: 
+Currently the `manifest.yml` looks like this: 
 
 ```yaml
 packages:

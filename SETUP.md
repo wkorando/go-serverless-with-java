@@ -1,12 +1,12 @@
 ## 0. Setup
 
-2. Open terminal
-3. Login into IBM Cloud CLI:
+1. Open terminal
+2. Login into IBM Cloud CLI:
 
 	```
 	ibmcloud login
 	```
-4. Configure the CLI:
+3. Configure the CLI:
 
 	```
 	ibmcloud target --cf
