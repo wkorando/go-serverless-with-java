@@ -228,7 +228,7 @@ packages:
         web: true
 ```
 
-For your convienence, the manifest YAML is also included as separate file in the repository. The file is located in the `config` directory and named `manifest-step8.yml`.
+For your convenience, the manifest YAML is also included as separate file in the repository. The file is located in the `config` directory and named `manifest-step8.yml`.
 
 </details>
 
