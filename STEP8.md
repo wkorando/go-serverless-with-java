@@ -172,7 +172,7 @@ Now let's build a serverless function and a sequence to determine the _n_<sup>th
 
 	Add this to the `manifest.yml` file in the Web IDE. The `sequences` entry should have the same indentation as the `actions` in the `golden-ratio` package.  This piece of config defines two sequences, `ratio` and `ratioWeb`. They should both first invoke the `fibonacciNumber` function. The output of the `fibonacciNumber` function is used to invoke the `calculateRatio` or the `calculateRatioWeb` function -- depending on which sequence you're looking into. 
 
-7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, click the git icon (1) on the left hand side. This opens the GitLab repo with the three files that have either been added or changed. Enter a commit message in the designated text area and click **Commit**.
+7. We're ready to commit our changes to the GitLab repo and to push them to the master branch. For this, in your Web IDE, CTRL-click the git icon (1) on the left hand side. This opens the GitLab repo in a separate tab with the three files that have either been added or changed. Enter a commit message in the designated text area and click **Commit**.
 
 	![](./images/git-commit-changes.png)
 
@@ -227,6 +227,8 @@ packages:
         actions: fibonacciNumber, calculateRatioWeb
         web: true
 ```
+
+For your convienence, the manifest YAML is also included as separate file in the repository. The file is located in the `config` directory and named `manifest-step8.yml`.
 
 </details>
 

@@ -23,7 +23,7 @@ An API Gateway can be a great way to make your functions and sequences more acce
 	
 	---
 	 
-2. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the previous section of this workshop if you're not sure anymore how to do this.
+2. Commit and push these changes via the Web IDE to trigger the deployment pipeline. Check the [Commit and Sync Changes with your GitLab Repo](GIT.md) section of this workshop if you're not sure anymore how to do this.
 
 3. Once the build has completed open the [Functions API Management](https://cloud.ibm.com/functions/apimanagement) page and click the **ratioAPI** row. It should look something like this:
 
@@ -179,8 +179,9 @@ packages:
           ratio: #Endpoint Path
             ratio: #Function Reference
               method: GET
-              response: json              ```
+              response: json
 ```
+For your convienence, the manifest YAML is also included as separate file in the repository. The file is located in the `config` directory and named `manifest-step9.yml`.
 
 </details>
 
