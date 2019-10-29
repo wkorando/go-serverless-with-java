@@ -1,10 +1,10 @@
 ## 10. Connecting to a Database
 
-IBM Cloud has a catalog of services available to handle many of the most common needs of an enterprise. One of the most common requirements for organizations is the longterm persistence of business valuable information in a database. In this section we will walk through connecting to a Cloudant instance. Cloudant is a NoSQL datastore, based on CouchDB.
+IBM Cloud has a catalog of services available to handle many of the needs of an enterprise. One of the most common requirements of enterprises is the longterm persistence of business valuable information in a database. In this section we will walk through connecting our serverless functionss to a Cloudant instance. Cloudant is a NoSQL datastore, based on [CouchDB](https://couchdb.apache.org/).
 
 ## Viewing Pre-Registered Packages
 
-1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services like messaging, IBM Watson and datastores. You can view these packages by running the following command:
+1. OpenWhisk on IBM Cloud comes with several pre-installed packages. These packages can help when interacting with common services like; messaging, IBM Watson, and datastores. You can view these packages by running the following command:
 	
 	```
 	ibmcloud fn package list /whisk.system
@@ -12,7 +12,7 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 
 	This command returns all the packages registered under the system package `/whisk.system`. In the output you should see: `/whisk.system/websocket`, `/whisk.system/messaging`, `/whisk.system/github`, etc.. 
 
-2. The package we are interested in is `/whisk.system/cloudant`. Pre-installed packages contain actions, feeds, and other useful bits. You can get a condensed summary of everything with in a package with this command:
+2. The package we are interested in is `/whisk.system/cloudant`. Pre-installed packages come with actions, feeds, and other useful bits for interacting with a service. You can get a condensed summary of everything within a package with this command:
 
 	```
 	ibmcloud fn package get --summary /whisk.system/cloudant
@@ -42,7 +42,7 @@ IBM Cloud has a catalog of services available to handle many of the most common 
 	...
 	```
 
-	The `/whisk.system/cloudant` package contains many common database operations; `update`, `read`, `create`, and so on. A key concept within serverless is offloading work on to the platform. In this case, instead of adding logic to the functions we are writing to handle database behavior, we will instead use these pre-existing functions. 
+	The `/whisk.system/cloudant` package contains many common database operations; `update`, `read`, `create`, and so on. A key concept within serverless is offloading work on to the platform. Here, instead of adding logic to the functions we are writing to handle database behavior, we will instead use these pre-existing functions. 
 
 ---
 **Tip**: If you want a more detailed view of a package you can also run `ibmcloud fn package get [PACKAGE_NAME]` like here:
@@ -59,7 +59,7 @@ Let's create and bind a Cloudant instance to a package so we can start persistin
 
 ### Copying a Package
 
-First we must make a copy of the `/whisk.system/cloudant` package. This isn't strictly necessary for this workshop, but if we were to bind a Cloudant instance to `/whisk.system/cloudant`, then everyone in that space would be writing to the same Cloudant instance which might not be what you want! 
+First we must make a copy of the `/whisk.system/cloudant` package. This isn't strictly necessary for this workshop, but if we were to bind a Cloudant instance to `/whisk.system/cloudant`, then everyone would be writing to the same Cloudant instance which might not be what you want! 
 
 1. To create a copy of a package run the following command: 
 
@@ -67,7 +67,7 @@ First we must make a copy of the `/whisk.system/cloudant` package. This isn't st
 	ibmcloud fn package bind /whisk.system/cloudant go-serverless-cloudant
 	```
 
-2. This will create a new package `/[YOUR_ACCOUNT_NAME]_dev/go-serverless-cloudant`. To view the newly created package run this command: 
+2. This will create a new package `/go-serverless-cloudant`. To view the newly created package run this command: 
 
 	```
 	ibmcloud fn package list
@@ -83,9 +83,9 @@ Next we need to create our Cloudant instance. This can be done through the IBM C
 	ibmcloud target -g Default
 	```
 
-	This is needed because our database will be created as resource in IBM Cloud, and resources are linked to a resource group.
+	This is necessary because our database will be created as resource in IBM Cloud, and resources are linked to a resource group.
 
-1. When creating our new Cloudant instance, be sure to replace `MY_REGION` in the command below with the current region you are working in:
+1. When creating our new Cloudant instance, be sure to replace `MY_REGION` in the command below with the [current region](region-list.md) you are working in:
 	
 	```
 	ibmcloud resource service-instance-create cloudant-serverless cloudantnosqldb lite MY_REGION -p '{"legacyCredentials": false}' 
@@ -123,7 +123,7 @@ For `dbname` we can configure a package to pass in default parameters to actions
 2. Next let's update the `go-serverless-cloudant` with the credentials we created in the previous section
 
 	```
-	ibmcloud fn service bind cloudantnosqldb /[YOUR_ACCOUNT_NAME]_dev/go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
+	ibmcloud fn service bind cloudantnosqldb /go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
 	```
 
 ### Create a New Database
