@@ -15,7 +15,7 @@ You will need the following to complete this workshop:
 	```
 	ibmcloud plugin install cloud-functions
 	```
-4. <a href="https://ibm.biz/Bdzgth" target="_blank">Create an IBM Cloud Account</a>
+4. <a href="https://ibm.biz/Bd2Uv6" target="_blank">Create an IBM Cloud Account</a>
 
 ## Table of Contents
 
