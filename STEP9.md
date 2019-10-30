@@ -62,7 +62,9 @@ There are a number of ways you can configure your API. A common one would be rat
 	}
 	```
 	
-	A rate limit of 20 calls per minute will be translated to one every 3 seconds. So, if we define a loop that calls the API 10 times in a row -- without sleeping -- the majority of those calls should be rejected. Let's try this by opening a Bash-like shell. Type the following command:
+	To prevent sudden bursts of invocations of the API, the [leaky bucket algoritm]() is used. Basically this translates to the fact that if a rate limit is set to e.g. 20 calls per minute, users will be restricted to 1 call every 3 seconds. So, if we define a loop that calls the API 10 times in a row -- without sleeping -- the majority of those calls should be rejected. 
+	
+	Let's try this by opening a Bash-like shell. Type the following command:
 
 	```bash
 	for i in {3..13}; do curl -H 'x-ibm-client-id: <your_apikey>' -H 'accept: application/json' https://<your-apiurl>.eu-gb.apiconnect.appdomain.cloud/api/ratio?number=$i; done;
@@ -181,6 +183,7 @@ packages:
               method: GET
               response: json
 ```
+
 For your convenience, the manifest YAML is also included as separate file in the repository. The file is located in the `config` directory and named `manifest-step9.yml`.
 
 </details>
