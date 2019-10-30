@@ -62,7 +62,7 @@ There are a number of ways you can configure your API. A common one would be rat
 	}
 	```
 	
-	To prevent sudden bursts of invocations of the API, the [leaky bucket algoritm]() is used. Basically this translates to the fact that if a rate limit is set to e.g. 20 calls per minute, users will be restricted to 1 call every 3 seconds. So, if we define a loop that calls the API 10 times in a row -- without sleeping -- the majority of those calls should be rejected. 
+	To prevent sudden bursts of invocations of the API, the [leaky bucket algoritm](https://en.wikipedia.org/wiki/Leaky_bucket) is used. Basically this translates to the fact that if a rate limit is set to e.g. 20 calls per minute, users will be restricted to 1 call every 3 seconds. Hence, if we define a loop that calls the API 10 times in a row -- without sleeping -- the majority of those calls should be rejected. 
 	
 	Let's try this by opening a Bash-like shell. Type the following command:
 
