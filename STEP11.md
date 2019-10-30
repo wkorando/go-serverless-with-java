@@ -3,13 +3,6 @@
 
 OpenWhisk supports the concept of rules. Rules are the combination of a trigger and an action to invoke when that trigger condition is met. Rules are a central concept when developing a serverless architecture by allowing actions andd sequences to be executed automatically. In this section we will look at how to create a trigger and combine it together with an action to create a rule. 
 
----
-THIS STEP IS CURRENTLY UNDER CONSTRUCTION CHECK BACK LATER
-
----
-
-
-
 ## Defining a Trigger
 
 Triggers allow for the creation of an event-driven architecture. Openwhisk is very flexible in how a triggering condition can be defined, it could be some external like time of day, or responding to changes in system state like a message being published to a queue, or as we will look at in this section a record being written to our Cloudant database. 
@@ -32,7 +25,7 @@ Triggers allow for the creation of an event-driven architecture. Openwhisk is ve
 	  	     inputs: 
 	  	     	 lifecycleEvent: CREATE #Lifecycle event to check for
  	```
-
+ 	
 ## Defining a Rule
 
 Rules are a combination of a trigger and an action to run. We defined the trigger, now we need to create an action to be executed with the trigger is tripped. 
@@ -75,7 +68,7 @@ Rules are a combination of a trigger and an action to run. We defined the trigge
         action: readCloudantDoc
 	```
 	
-4. Commit and push the code to the repository to kick off the build pipeline. 
+4. [Commit and Sync Changes with your GitLab Repo](GIT.md)
 
 ## Testing the Rule 
 
