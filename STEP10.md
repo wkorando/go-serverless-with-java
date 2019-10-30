@@ -281,6 +281,8 @@ packages:
               response: json  
 ```
 
+For your convenience, the manifest YAML is also included as separate file in the repository. The file is located in the `config` directory and named `manifest-step10.yml`.
+
 </details>
 
 <p  align="center">
