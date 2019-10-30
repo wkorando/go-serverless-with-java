@@ -87,7 +87,7 @@ There are a number of ways you can configure your API. A common one would be rat
 	{"status":429,"message":"Error: Rate limit exceeded"}
 	```
 
-4. If we now introduce a 3 seconds pause after each API call, we stick within the rate limit and all calls should be accepted. Let's try this by adding a three seconds pause to the command as follows. The sleep of 3 seconds can be added as follows:
+4. If we now introduce a 3 seconds pause after each API call, we stick within the rate limit and all calls should be accepted. Let's try this by adding a three seconds pause. This can be done as follows:
 
 	```bash
 	for i in {3..13}; do curl -H 'x-ibm-client-id: <your_apikey>' -H 'accept: application/json' https://833f4b30.eu-gb.apiconnect.appdomain.cloud/api/ratio?number=$i; sleep 3; done;
