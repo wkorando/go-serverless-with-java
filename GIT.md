@@ -1,6 +1,8 @@
 # Commit and Sync Changes with your GitLab Repo
 
-To commit your changes to the GitLab repo and to push them to the master branch, CTRL-click the git icon (1) on the left hand side in your **Web IDE**. This opens the GitLab repo in a separate tab with the files that have either been added or changed. Next, enter a commit message in the designated text area and click **Commit**.
+To commit your changes to the GitLab repo and to push them to the master branch, CTRL-click the git icon (1) on the left hand side in your **Web IDE**. 
+
+This opens the GitLab repo in a separate tab with the files that have either been added or changed. Next, enter a commit message in the designated text area and click **Commit**.
 
 ![](./images/git-commit-changes.png)
 
