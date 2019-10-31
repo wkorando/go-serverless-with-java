@@ -17,6 +17,8 @@ You will need the following to complete this workshop:
 	```
 4. <a href="https://ibm.biz/Bd2Uv6" target="_blank">Create an IBM Cloud Account</a>
 
+**Windows Users:** See this [guide](WINDOWS-HELP.md) for additional setup steps and info on running this lab.
+
 ## Table of Contents
 
 ### [0. Workshop Setup](SETUP.md)
