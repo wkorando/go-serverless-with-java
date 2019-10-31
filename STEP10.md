@@ -123,7 +123,7 @@ For `dbname` we can configure a package to pass in default parameters to actions
 2. Next let's update the `go-serverless-cloudant` with the credentials we created in the previous section
 
 	```
-	ibmcloud fn service bind cloudantnosqldb /go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
+	ibmcloud fn service bind cloudantnosqldb go-serverless-cloudant --instance cloudant-serverless --keyname creds_cloudantserverless
 	```
 
 ### Create a New Database
