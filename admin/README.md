@@ -46,25 +46,60 @@ These are issues commonly encountered when running this lab:
 
 <details>
   <summary>User has an Expired IBM Account</summary>
+  
   If a user has an expired/lapsed IBM account it can be reactivated using a promo code. 
 </details>
+
+
+### Unable to find Organization and/or Space
+
+<details>
+  <summary>User has a recently created account, but is unable to set an organization or space</summary>
+  
+  This is likely the result of how IBM Cloud setups up accounts. IBM Cloud favors associating accounts in `eu-gb` or `eu-dr` for example, also likely `us-south` over `us-east`. Steps to resolve: 
+
+1. Set the region via the command line to something more appropriate `ibmcloud target -r REGION`
+	
+2. Run `ibmcloud target --cf` again. If organziation and space are set, the issue should be resolved. 
+
+</details>
+
+### Resource Group not Set
+
+<details>
+  <summary>User has run `ibmcloud target --cf` but resource group is not being set</summary>
+  
+Sometimes resource group isn't set for a user, steps to resolve: 
+
+1. Run the following command to view available resource groups `ibmcloud resource groups`
+	
+2. Run `ibmcloud target -g RESOURCE_GROUP` and set to the appropriate resource group (probably `Default`, but might be something else depending upon user needs)
+
+</details>
+
+
 
 
 ### Blank Region When Invoking Actions
 
 <details>
   <summary>User attempts to invoke action, but gets response saying region is blank</summary>
-  Sometimes an user, even if they run `target --cf` and select a region, will still run into issues when attempting to invoke actions. Steps to resolve:
-  1. Run: `ibmcloud target -r REGION` see above for region list 
+  
+  Sometimes an user, even if they run `target --cf` and select a region, will still run into issues when attempting to invoke actions (an error is returned saying something to the effect of "region is blank"). Steps to resolve:
+  
+1. Run: `ibmcloud target -r REGION` see above for region list 
 </details>
 
 ### Creating Build Pipeline Problems
 
 <details>
   <summary>Space field not being prepopulated in API area</summary>
+ 	
  	A user with multiple organizations might run into this issue. Steps to resolve are as follows:
- 	1. In the command like run `ibmcloud account spaces` in the output it should include the org they are using within Cloud Foundry
- 	2. Make sure that same Organization is being used in the API creation Org field
+ 	
+1. In the command like run `ibmcloud account spaces` in the output it should include the org they are using within Cloud Foundry
+ 	
+2. Make sure that same Organization is being used in the API creation Org field
 </details>
 
 

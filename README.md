@@ -6,7 +6,10 @@ In this workshop we will look at how to write Serverless Functions in Java and r
 
 ## Prerequisites:
 
-You will need the following to complete this workshop:
+Before beginning this workshop there are a few actions you must complete. Expand below to view the steps for the OS you plan on using when you do the workshop.
+
+<summary><h3>Mac and Linux Users</h3></summary>
+<details>
 
 1. [Java 8+](https://adoptopenjdk.net/)
 2. [IBM Cloud CLI](https://github.com/IBM-Cloud/ibm-cloud-cli-release/releases/)
@@ -17,7 +20,31 @@ You will need the following to complete this workshop:
 	```
 4. <a href="https://ibm.biz/Bd2Uv6" target="_blank">Create an IBM Cloud Account</a>
 
-**Windows Users:** See this [guide](WINDOWS-HELP.md) for additional setup steps and info on running this lab.
+</details>
+
+<summary><h3>Windows Users</h3></summary>
+<details>
+
+1. [Java 8+](https://adoptopenjdk.net/)
+2. [IBM Cloud CLI](https://github.com/IBM-Cloud/ibm-cloud-cli-release/releases/)
+3. Install the IBM Cloud Functions Plugin by running this command in your terminal window:
+
+	```
+	ibmcloud plugin install cloud-functions
+	```
+4. <a href="https://ibm.biz/Bd2Uv6" target="_blank">Create an IBM Cloud Account</a>
+5. [Install Cygwin](https://www.cygwin.com/)
+	6. While installing include **curl**, **vim**, and **git** as options
+
+<h3>Using the Command Line</h3>
+
+It is HIGHLY encouraged to use Cygwin to complete this workshop. Cygwin translates to the same pathing as the commands shown in this guide (*nix pathing) and also has the command line tools this workshop will use.
+
+<h3>Using the Maven Wrapper</h3>
+
+In the guide when the maven warpper is used `./mvnw` substitute with `./mvnw.cmd`.
+
+</details>
 
 ## Table of Contents
 
